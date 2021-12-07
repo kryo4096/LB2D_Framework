@@ -1,0 +1,19 @@
+C:\Users\jonas\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.5744.254\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_MAKE_PROGRAM=C:/Users/jonas/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/ninja/win/ninja.exe -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja C:\Users\jonas\Documents\Code\LBM\LB2D_Framework
+CMake Error at cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeSystem.cmake:6 (include):
+  include could not find requested file:
+
+    C:/Users/jonas/Documents/Code/LBM/LB2D_Framework/vcpkg/scripts/buildsystems/vcpkg.cmake
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+CMake Error at C:/Users/jonas/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/cmake/win/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find GLEW (missing: GLEW_INCLUDE_DIRS GLEW_LIBRARIES)
+Call Stack (most recent call first):
+  C:/Users/jonas/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/cmake/win/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:594 (_FPHSA_FAILURE_MESSAGE)
+  C:/Users/jonas/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/cmake/win/share/cmake-3.21/Modules/FindGLEW.cmake:215 (find_package_handle_standard_args)
+  CMakeLists.txt:11 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/jonas/Documents/Code/LBM/LB2D_Framework/cmake-build-relwithdebinfo/CMakeFiles/CMakeOutput.log".

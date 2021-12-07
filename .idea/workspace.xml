@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="LB2D" targetName="LB2D" />
+      <config projectName="LB2D" targetName="EasyBMP" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/LB2D_Framework.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/CMake Overview" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/project-colors.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/Browse.VC.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/ipch/AutoPCH/4b99d4acf4e1a783/MAIN.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/ipch/AutoPCH/80da3313998201e2/MAIN.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/ipch/AutoPCH/ad58e98a2f1c69d4/MAIN.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/LB2D_Framework/v17/workspaceFileList.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/ProjectSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/cmake.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/query/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/query/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/query/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/query/toolchains-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/cache-v2-fabae3a372b334cf4cc7.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/cmakeFiles-v1-f925cb1d86d50a58983d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/codemodel-v2-3fd36038ab91a94aeff9.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/directory-.-RelWithDebInfo-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/directory-third_party.EasyBMP-RelWithDebInfo-a6d0eafc705a0fd9829e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/index-2021-12-07T13-57-58-0742.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/target-EasyBMP-RelWithDebInfo-6ab1a0ef071662812f99.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/target-LB2D-RelWithDebInfo-c6f4f2aaac4fc345f4b8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.cmake/api/v1/reply/toolchains-v1-30b88c6df5a4952bb5b2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.ninja_deps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/.ninja_log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeRCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/embed.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/intermediate.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/manifest.rc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/manifest.res" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/src/main.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir/vc140.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/ShowIncludes/foo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/ShowIncludes/main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/ShowIncludes/main.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/LB2D.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/LB2D.ilk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/LB2D.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/freeglut.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/glew32.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/src/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/third_party/EasyBMP/CMakeFiles/EasyBMP.dir/EasyBMP.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/third_party/EasyBMP/CMakeFiles/EasyBMP.dir/EasyBMP.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/third_party/EasyBMP/EasyBMP.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-relwithdebinfo/third_party/EasyBMP/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/query/client-MicrosoftVS/query.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/cache-v2-3ac26ae1fb049a37d927.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/cmakeFiles-v1-882b747717bc07b4c521.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/codemodel-v2-a8f8d9713e03f25ff6e0.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/directory-third_party.EasyBMP-Debug-a6d0eafc705a0fd9829e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/index-2021-12-07T13-56-45-0883.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/target-EasyBMP-Debug-6d31879e2f8d85ef5019.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/target-LB2D-Debug-2ddcfe0b1f10913b95d4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/reply/toolchains-v1-30b88c6df5a4952bb5b2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.ninja_deps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/.ninja_log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdC/CMakeCCompilerId.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdC/CMakeCCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/3.21.21080301-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/embed.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/intermediate.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/manifest.rc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/manifest.res" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/src/main.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/LB2D.dir/vc140.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/ShowIncludes/foo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/ShowIncludes/main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/ShowIncludes/main.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/LB2D.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/LB2D.ilk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/LB2D.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/VSInheritEnvironments.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/freeglutd.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/glew32d.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/third_party/EasyBMP/CMakeFiles/EasyBMP.dir/EasyBMP.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/third_party/EasyBMP/CMakeFiles/EasyBMP.dir/EasyBMP.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/third_party/EasyBMP/EasyBMP.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/build/x64-Debug/third_party/EasyBMP/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/third_party/EasyBMP/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.deps/EasyBMP.P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.deps/main.P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/H_root.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/H_root.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2D" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile.mingw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile_mac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/global.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lattice.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/lattice.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opengl.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/opengl.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/property_array.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/property_array.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/shader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/Copying.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/bin/freeglut.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/bin/x64/freeglut.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/include/GL/freeglut.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/include/GL/freeglut_ext.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/include/GL/freeglut_std.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/include/GL/glut.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/lib/libfreeglut.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/lib/libfreeglut_static.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/lib/x64/libfreeglut.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/freeglut/lib/x64/libfreeglut_static.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/TODO.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release MX/Win32/glew32mx.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release MX/x64/glew32mx.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/Win32/glew32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/Win32/glewinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/Win32/visualinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/x64/glew32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/x64/glewinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/bin/Release/x64/visualinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/advanced.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/basic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/build.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/credits.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/glew.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/glew.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/glew.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/glew.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/glxew.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/gpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/install.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/khronos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/log.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/mesa.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/ogl_sm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/doc/wglew.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/include/GL/glew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/include/GL/glxew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/include/GL/wglew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release MX/Win32/glew32mx.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release MX/Win32/glew32mxs.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release MX/x64/glew32mx.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release MX/x64/glew32mxs.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release/Win32/glew32.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release/Win32/glew32s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release/x64/glew32.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew-1.10.0/lib/Release/x64/glew32s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/glew32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/glew32mx.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/glewinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/visualinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/x64/glew32.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/x64/glew32mx.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/x64/glewinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/bin/x64/visualinfo.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/include/GL/glew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/include/GL/glxew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/include/GL/wglew.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/lib/libglew32.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/lib/libglew32.dll.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/lib/libglew32mx.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/mingw/glew/lib/libglew32mx.dll.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/Copying.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/bin/freeglut.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/bin/x64/freeglut.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/include/GL/freeglut.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/include/GL/freeglut_ext.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/include/GL/freeglut_std.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/include/GL/glut.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/lib/freeglut.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/windows/msvc/freeglut/lib/x64/freeglut.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:RelWithDebInfo" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2021" />
+    <option name="minorVersion" value="3" />
+  </component>
+  <component name="ProjectId" id="21xQG30nPRIGZJXKmOHmUNBw6pU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jonas\Documents\Code\LBM\LB2D_Framework" />
+    </key>
+  </component>
+  <component name="RunManager" selected="CMake Application.LB2D">
+    <configuration name="EasyBMP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="EasyBMP" CONFIG_NAME="RelWithDebInfo">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LB2D" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.LB2D" />
+      <item itemvalue="CMake Application.EasyBMP" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="" />
+      <created>1638880162083</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638880162083</updated>
+      <workItem from="1638880164011" duration="854000" />
+      <workItem from="1638881239763" duration="199000" />
+      <workItem from="1638884164603" duration="1106000" />
+      <workItem from="1638885466262" duration="119000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="source_code[allocator]" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
