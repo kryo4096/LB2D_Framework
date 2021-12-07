@@ -12,16 +12,20 @@ int main(int argc, char *argv[])
 {
 	omp_set_num_threads(6);
 	
-	lb::simulation* sim = new lb::simulation(512,512,10000,0.05);
+	lb::simulation* sim = new lb::simulation(256,256,10000,0.05);
 	sim->initialize();
 	std::cout << *sim << std::endl;
 
 	#ifdef USE_OPENGL_VISUALIZATION
-
         std::cout << std::filesystem::current_path() << std::endl;
 
-		lb::visualization::initialize(sim,argc,argv);
-		lb::visualization::get_instance().run();
+		try {
+			lb::visualization::initialize(sim, argc, argv);
+			lb::visualization::get_instance().run();
+		}
+		catch (std::runtime_error e) {
+			std::cerr << e.what() << std::endl;
+		}
 	
 	#else
 	

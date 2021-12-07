@@ -147,7 +147,7 @@ namespace lb {
         /**  @brief apply wall boundary conditions */
         void wall_bc() {
             #pragma omp parallel for
-            for (unsigned int i = 0; i < l.wall_nodes.size(); ++i) {
+            for (int i = 0; i < l.wall_nodes.size(); ++i) {
                 // **************************
                 // * fill in your code here *
                 // **************************
