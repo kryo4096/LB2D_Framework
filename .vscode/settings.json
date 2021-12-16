@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cmath": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "semaphore": "cpp",
+        "valarray": "cpp",
+        "algorithm": "cpp"
+    }
+}

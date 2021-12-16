@@ -1,0 +1,4 @@
+/home/jonas/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_MAKE_PROGRAM=/home/jonas/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/ninja/linux/ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja /home/jonas/ETH/21_hs/LBM/LB2D_Framework
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries

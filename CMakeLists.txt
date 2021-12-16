@@ -12,14 +12,17 @@ set_target_properties(
     VS_DEBUGGER_WORKING_DIRECTORY "./"
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fopenmp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -O3")
 
 find_package(GLEW REQUIRED)
-target_link_libraries(LB2D PRIVATE GLEW::GLEW)
-
 find_package(GLUT REQUIRED)
-target_link_libraries(LB2D PRIVATE GLUT::GLUT)
+find_package(OpenGL REQUIRED)
+find_package(X11 REQUIRED)
 
 add_subdirectory(./third_party/EasyBMP)
-target_link_libraries(LB2D PRIVATE EasyBMP)
+
+target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW X11 EasyBMP)
+
+#lgomp -lglut -lGLU -lGL -lGLEW -lX11
+
 

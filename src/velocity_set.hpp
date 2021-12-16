@@ -65,20 +65,23 @@ public:
 	 */
 	inline void f_eq(float_type* f_eq, float_type rho, float_type u, float_type v) const
 	{
-		// **************************
-		// * fill in your code here *
-		// * the lines below are    *
-		// * just examples          *
-		// **************************
-		f_eq[0] = W[0];
-		f_eq[1] = W[1];
-		f_eq[2] = W[2];
-		f_eq[3] = W[3];
-		f_eq[4] = W[4];
-		f_eq[5] = W[5];
-		f_eq[6] = W[6];
-		f_eq[7] = W[7];
-		f_eq[8] = W[8];
+
+		float x_root = sqrtf(1 + 3 * u * u);
+		float y_root = sqrtf(1 + 3 * v * v);
+
+		float A = rho * (2 - x_root) * (2 - y_root);
+		float BX = (2 * u + x_root) / (1 - u);
+		float BY = (2 * v + y_root) / (1 - v);
+
+		for(int i = 0; i < velocity_set().size; i++) {
+			float w = velocity_set().W[i];
+
+			float cx = velocity_set().c[0][i];
+			float cy = velocity_set().c[1][i];
+			
+			f_eq[i] = w * A * powf(BX, cx) * powf(BY, cy);
+		}
+
 	}
 
 	/** 

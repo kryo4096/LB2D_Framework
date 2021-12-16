@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "third_party/EasyBMP",
+					"jsonFile" : "directory-third_party.EasyBMP-Debug-be38070ffa38a8b7877b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "third_party/EasyBMP",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "LB2D",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "EasyBMP::@55dfbb332ebde549d9c1",
+					"jsonFile" : "target-EasyBMP-Debug-9a464e6527995f34c598.json",
+					"name" : "EasyBMP",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "LB2D::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LB2D-Debug-42b438c901803788c03c.json",
+					"name" : "LB2D",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-debug",
+		"source" : "/home/jonas/ETH/21_hs/LBM/LB2D_Framework"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

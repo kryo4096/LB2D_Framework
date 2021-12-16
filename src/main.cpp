@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
 	omp_set_num_threads(6);
 	
-	lb::simulation* sim = new lb::simulation(256,256,10000,0.05);
+	lb::simulation* sim = new lb::simulation(128,128,10000,0.05);
 	sim->initialize();
 	std::cout << *sim << std::endl;
 
@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 		catch (std::runtime_error e) {
 			std::cerr << e.what() << std::endl;
 		}
-	
 	#else
 	
 		// Here are some hints for getting aquainted with the lattice class
