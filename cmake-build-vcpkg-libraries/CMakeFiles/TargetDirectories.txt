@@ -1,6 +1,0 @@
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/CMakeFiles/rebuild_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/CMakeFiles/edit_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/CMakeFiles/LB2D.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/third_party/EasyBMP/CMakeFiles/rebuild_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/third_party/EasyBMP/CMakeFiles/edit_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-vcpkg-libraries/third_party/EasyBMP/CMakeFiles/EasyBMP.dir

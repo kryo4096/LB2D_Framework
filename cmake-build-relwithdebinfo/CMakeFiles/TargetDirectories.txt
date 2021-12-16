@@ -1,6 +1,0 @@
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/CMakeFiles/rebuild_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/CMakeFiles/edit_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/CMakeFiles/LB2D.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/third_party/EasyBMP/CMakeFiles/rebuild_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/third_party/EasyBMP/CMakeFiles/edit_cache.dir
-/home/jonas/ETH/21_hs/LBM/LB2D_Framework/cmake-build-relwithdebinfo/third_party/EasyBMP/CMakeFiles/EasyBMP.dir

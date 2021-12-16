@@ -1,4 +1,0 @@
-# ninja log v5
-1189	1211	1638961968040350828	third_party/EasyBMP/libEasyBMP.a	f8e559407a150ccc
-0	1189	1638961968023684161	third_party/EasyBMP/CMakeFiles/EasyBMP.dir/EasyBMP.cpp.o	214ae2a5f56c46c4
-0	3607	1638961970433684041	CMakeFiles/LB2D.dir/src/main.cpp.o	8f26e6a9e564afcc
