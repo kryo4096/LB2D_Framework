@@ -341,6 +341,9 @@ class simulation {
         }
 
         void collide_kbc() {
+
+	        static auto c = velocity_set().c;
+
             #pragma omp for
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
@@ -379,17 +382,9 @@ class simulation {
 
         /** @brief LB step */
         void step() {
-
-            Timer timer;
-
-            timer.start();
             #pragma omp parallel
             advect();
-            timer.stop();
 
-            std::cout << "Advection took " << timer.elapsedMilliseconds() << " ms.\n";
-
-            timer.start();
             switch ( collisionType ){
                 case CollisionType::LBGK: {
                     #pragma omp parallel
@@ -402,11 +397,7 @@ class simulation {
                     break;
                 }
             }
-            timer.stop();
-            std::cout << "Collision took " << timer.elapsedMilliseconds() << " ms." << std::endl;
-
-
-
+			
             // file io
             if (file_output && (((time + 1) % output_freq) == 0 || time == 0)) {
                 write_fields();
