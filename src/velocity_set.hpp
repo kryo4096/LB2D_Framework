@@ -81,7 +81,6 @@ public:
 			
 			f_eq[i] = w * A * powf(BX, cx) * powf(BY, cy);
 		}
-
 	}
 
 	/** 

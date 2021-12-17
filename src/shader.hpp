@@ -330,7 +330,6 @@ private: // impl
 
 	std::string read_file(std::string file_name)
 	{
-        std::cout << "read: " << file_name << std::endl;
 
 		// open file
 		std::ifstream ifs(file_name, std::ios::binary);

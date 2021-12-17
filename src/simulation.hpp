@@ -7,9 +7,16 @@
 #ifndef LB_SIMULATION_HPP_INCLUDED
 #define LB_SIMULATION_HPP_INCLUDED
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include "H_root.hpp"
 #include "lattice.hpp"
+#include "timer.hpp"
 #include <sstream>
+#include <random>
+
+
 
 #include <omp.h>
 
@@ -23,7 +30,13 @@ namespace lb {
  *  this class are @ref simulation::advect() and 
  *  @ref simulation::collide().
  */
-    class simulation {
+
+enum CollisionType {
+    LBGK,
+    KBC
+};
+
+class simulation {
 	public:
 	    lattice l;                 ///< lattice
 	    std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
@@ -35,6 +48,7 @@ namespace lb {
 	    bool file_output;          ///< flag whether to write files
 	    unsigned int output_freq;  ///< file output frequency
 	    unsigned int output_index; ///< index for file naming
+	    CollisionType collisionType;
 
     public: // ctor
 
@@ -43,20 +57,22 @@ namespace lb {
          *  @brief Construct from domain size and flow parameters
          *  @param[in] nx    extent in x direction
          *  @param[in] ny    extent in y direction
-         *  @param[in] _Re   Reynolds number
-         *  @param[in] _Vmax mean flow velocity
+         *  @param[in] Re   Reynolds number
+         *  @param[in] Vmax mean flow velocity
          */
-        simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax)
+        simulation(unsigned int nx, unsigned int ny, float_type Re, float_type Vmax, CollisionType collisionType=CollisionType::LBGK)
                 : l(nx, ny),
                   shift(velocity_set().size),
-                  Re(_Re),
-                  Vmax(_Vmax),
-                  visc( /*fill in your code here*/ 0.001f),
-                  beta( /*fill in your code here*/ 0.9f),
+                  Re(Re),
+                  Vmax(Vmax),
+                  visc(Vmax * ny / Re),
+                  beta(1 / (2 * visc / (velocity_set().cs * velocity_set().cs) + 1)),
                   time(0),
                   file_output(false), // set to true if you want to write files
                   output_freq(100),
-                  output_index(0) {
+                  output_index(0),
+                  collisionType(collisionType)
+                  {
             // define amount to shift populations for advection
             for (unsigned int i = 0; i < velocity_set().size; ++i) {
                 shift[i] = l.index(velocity_set().c[0][i], velocity_set().c[1][i]) - l.index(0, 0);
@@ -69,30 +85,75 @@ namespace lb {
          *  Initialization includes defining initial density, velocity and
          *  populations. You can use Taylor-Green vortex flow conditions.
          */
-        void initialize() {
-            // **************************
-            // * fill in your code here *
-            // * the lines below are    *
-            // * just examples          *
-            // **************************
+        void taylor_green() {
 
-			#pragma omp parallel
+            float_type mach = Vmax / velocity_set().cs;
+
+            float_type Kx = 2 * M_PI / l.nx;
+            float_type Ky = 2 * M_PI / l.ny;
+
+            float_type Ksqr = Kx * Kx + Ky * Ky;
+
             for(int i = 0; i < l.nx; i++) {
-	            for(int j = 0; j < l.nx; j++) {
+                for(int j = 0; j < l.nx; j++) {
+                    float_type u = - Vmax * cos(Kx * i) * sin(Ky * j);
+                    float_type v = Vmax * cos(Ky * j) * sin(Kx * i);
+                    float_type rho = 1 - mach * mach / (2 * Ksqr) * (Ky*Ky*cos(2 * Kx * i) + Kx*Kx*sin(2 * Ky * j));
 
-					float u = 0;
+                    float_type f_eq[9];
+                    velocity_set().f_eq(f_eq, rho, u, v);
+
+                    auto& node = l.get_node(i, j);
+
+                    for(int p = 0; p < 9; p++) {
+                        node.f(p) = f_eq[p];
+                    }
+
+                    node.u() = u;
+                    node.v() = v;
+                    node.rho() = rho;
+                }
+            }
+        }
+
+        void doubly_periodic_shear_layer() {
+            float_type kappa = 80.0;
+            float_type delta = 0.05;
+
+            float_type Kx = 2 * M_PI / l.nx;
 
 
-		            float f_eq[9];
-					velocity_set().f_eq(f_eq, 1.0, u, 0.0);
+            for(int i = 0; i < l.nx; i++) {
+                for(int j = 0; j < l.nx; j++) {
 
-					for(int p = 0; p < 9; p++) {
-						l.get_node(i, j).f(p) = f_eq[p];
-					}
+                    float_type u;
+                    if (j <= l.ny / 2) {
+                        u = Vmax * tanh(kappa * (j / (float_type) l.ny - 0.25));
+                    } else {
+                        u = Vmax * tanh(kappa * (0.75 - j / (float_type) l.ny));
+                    }
 
+                    float_type v = Vmax * delta * sin(2 * M_PI * ((float_type) i / l.nx + 0.25));
+                    float_type rho = 1.0;
 
-	            }
-			}
+                    float_type f_eq[9];
+                    velocity_set().f_eq(f_eq, rho, u, v);
+
+                    auto& node = l.get_node(i, j);
+
+                    for(int p = 0; p < 9; p++) {
+                        node.f(p) = f_eq[p];
+                    }
+
+                    node.u() = u;
+                    node.v() = v;
+                    node.rho() = rho;
+                }
+            }
+        }
+
+        void initialize() {
+
         }
 
         /**
@@ -101,9 +162,6 @@ namespace lb {
          *  Include periodic boundary conditions here also
          */
         void advect() {
-
-
-
             // Velocity 1 : (1, 0)
             #pragma omp for
             for (int j = 0; j < l.ny; j++) {
@@ -219,19 +277,18 @@ namespace lb {
 				}
 			};
 
+            #pragma omp barrier
 
 			#pragma omp for
 			for(int i = 0; i < l.nx + 1; i++) apply_buffers(i, -1);
-
 			#pragma omp for
 	        for(int i = 0; i < l.nx + 1; i++) apply_buffers(i, l.ny);
-
 			#pragma omp for
 	        for(int j = 0; j < l.ny + 2; j++) apply_buffers(-1, j-1);
-
 			#pragma omp for
 	        for(int j = 0; j < l.ny; j++) apply_buffers(l.nx, j);
         }
+
 
         /**  @brief apply wall boundary conditions */
         void wall_bc() {
@@ -244,50 +301,111 @@ namespace lb {
         }
 
         /** @brief collide the populations */
-        void collide() {
+        void collide_lbgk() {
 
-            #pragma omp for
+            static auto c = velocity_set().c;
+
+            #pragma omp for schedule(static)
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);
 
-                    l.rho[idx] = 0;
+                    float_type rho = 0;
                     float_type u = 0;
                     float_type v = 0;
+                    float_type f[9];
 
                     for (int k = 0; k < velocity_set().size; k++) {
-                        l.rho[idx] += l.f[k][idx];
-                        u += l.f[k][idx] * (float) velocity_set().c[0][k];
-                        v += l.f[k][idx] * (float) velocity_set().c[1][k];
+                        f[k] = l.f[k][idx];
+                        rho += f[k];
+                        u += f[k] * (float_type) c[0][k];
+                        v += f[k] * (float_type) c[1][k];
                     }
 
-					l.u[idx] = u / l.rho[idx];
-					l.v[idx] = v / l.rho[idx];
+                    u /= rho;
+                    v /= rho;
 
-	                float f_eq[9];
-	                velocity_set().f_eq(f_eq, l.rho[idx], l.u[idx], l.v[idx]);
+                    l.u[idx] = u;
+                    l.v[idx] = v;
+                    l.rho[idx] = rho;
+
+	                float_type f_eq[9];
+	                velocity_set().f_eq(f_eq, rho, u, v);
 
 					for(int k = 0; k < velocity_set().size; k++) {
-						l.f[k][idx] += 2 * 0.99f * (f_eq[k] - l.f[k][idx]);
+						l.f[k][idx] = f[k] + 2 * beta * (f_eq[k] - f[k]);
 					}
-
-
                 }
             }
 
         }
 
+        void collide_kbc() {
+            #pragma omp for
+            for (int j = 0; j < static_cast<int>(l.ny); ++j) {
+                for (int i = 0; i < static_cast<int>(l.nx); ++i) {
+                    int idx = l.index(i, j);
+
+                    float_type rho = 0;
+                    float_type u = 0;
+                    float_type v = 0;
+                    float_type f[9];
+
+                    for (int k = 0; k < velocity_set().size; k++) {
+                        f[k] = l.f[k][idx];
+                        rho += f[k];
+                        u += f[k] * (float_type) c[0][k];
+                        v += f[k] * (float_type) c[1][k];
+                    }
+
+                    u /= rho;
+                    v /= rho;
+
+                    l.u[idx] = u;
+                    l.v[idx] = v;
+                    l.rho[idx] = rho;
+
+                    float_type f_eq[9];
+                    velocity_set().f_eq(f_eq, rho, u, v);
+
+                    for(int k = 0; k < velocity_set().size; k++) {
+                        l.f[k][idx] = f[k] + 2 * beta * (f_eq[k] - f[k]);
+                    }
+
+
+                }
+            }
+        }
+
         /** @brief LB step */
         void step() {
+
+            Timer timer;
+
+            timer.start();
             #pragma omp parallel
-            {
-                advect();
-                #pragma omp barrier
-                wall_bc();
-                #pragma omp barrier
-                collide();
-                #pragma omp barrier
+            advect();
+            timer.stop();
+
+            std::cout << "Advection took " << timer.elapsedMilliseconds() << " ms.\n";
+
+            timer.start();
+            switch ( collisionType ){
+                case CollisionType::LBGK: {
+                    #pragma omp parallel
+                    collide_lbgk();
+                    break;
+                }
+                case CollisionType::KBC: {
+                    #pragma omp parallel
+                    collide_kbc();
+                    break;
+                }
             }
+            timer.stop();
+            std::cout << "Collision took " << timer.elapsedMilliseconds() << " ms." << std::endl;
+
+
 
             // file io
             if (file_output && (((time + 1) % output_freq) == 0 || time == 0)) {
