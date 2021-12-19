@@ -33,7 +33,7 @@ namespace lb {
  *  @return alpha
  */
 template <typename Node>
-inline float_type H_root(const Node& n)
+inline scalar_t H_root(const Node& n)
 {
 	// **************************
 	// * fill in your code here *

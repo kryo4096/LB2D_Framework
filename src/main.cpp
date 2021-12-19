@@ -19,7 +19,7 @@ namespace lb {
         }
     }
 
-    void convergence_test(int count, int start_size, float_type log_step_size, int iterations, float_type Vmax, float_type Re) {
+    void convergence_test(int count, int start_size, scalar_t log_step_size, int iterations, scalar_t Vmax, scalar_t Re) {
 
         std::cout << "Simulation parameters:" << std::endl;
 
@@ -31,8 +31,8 @@ namespace lb {
 
         std::cout << "L \tError (L2) \tConvergence Rate" << std::endl;
 
-        std::vector<float_type> errors;
-        std::vector<float_type> Ls;
+        std::vector<scalar_t> errors;
+        std::vector<scalar_t> Ls;
 
         for (int n = 0; n < count; n++) {
 
@@ -44,24 +44,24 @@ namespace lb {
             int nx = sim->l.nx;
             int ny = sim->l.ny;
 
-            float_type Kx = 2 * M_PI / nx;
-            float_type Ky = 2 * M_PI / ny;
-            float_type Ksqr = Kx * Kx + Ky * Ky;
-            float_type nu = sim->visc;
-            float_type l2error = 0;
-            float_type dA = 1.0 / L / L;
+            scalar_t Kx = 2 * M_PI / nx;
+            scalar_t Ky = 2 * M_PI / ny;
+            scalar_t Ksqr = Kx * Kx + Ky * Ky;
+            scalar_t nu = sim->visc;
+            scalar_t l2error = 0;
+            scalar_t dA = 1.0 / L / L;
 
             for(int t = 0; t < iterations; t++) {
                 sim->step();
                 for(int i = 0; i < nx; i++) {
                     for(int j = 0; j < ny; j++) {
-                        float_type u = - Vmax * cos(Kx * i) * sin(Ky * j) * exp(-nu*Ksqr * t);
-                        float_type v = Vmax * cos(Ky * j) * sin(Kx * i) * exp(-nu*Ksqr * t);
+                        scalar_t u = - Vmax * cos(Kx * i) * sin(Ky * j) * exp(-nu * Ksqr * t);
+                        scalar_t v = Vmax * cos(Ky * j) * sin(Kx * i) * exp(-nu * Ksqr * t);
 
                         auto& node = sim->l.get_node(i, j);
 
-                        float_type error_u = abs(u - node.u());
-                        float_type error_v = abs(v - node.v());
+                        scalar_t error_u = abs(u - node.u());
+                        scalar_t error_v = abs(v - node.v());
                         l2error += (error_u * error_u + error_v * error_v) * dA;
                     }
                 }
@@ -74,7 +74,7 @@ namespace lb {
             Ls.push_back(L);
 
             if(n > 0) {
-                std::cout << ",\t" << -log(errors[n] / errors[n-1]) / log(Ls[n] / (float_type) Ls[n-1]); // log-log graph slope
+                std::cout << ",\t" << -log(errors[n] / errors[n-1]) / log(Ls[n] / (scalar_t) Ls[n - 1]); // log-log graph slope
             }
 
             std::cout << std::endl;

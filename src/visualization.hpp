@@ -56,7 +56,7 @@ private: // ctors
 	  periodic_x(sim->l.periodic_x),
 	  periodic_y(sim->l.periodic_y),
 	  // if simulation does not use floats -> cast every time
-	  float_cast(((typeid(float_type)==typeid(float)) ? false : true)),
+	  float_cast(((typeid(scalar_t)==typeid(float)) ? false : true)),
 	  rho_data_cast((float_cast ? real_dim_x*real_dim_y : 0),0),
 	  u_data_cast((float_cast ? real_dim_x*real_dim_y : 0),0),
 	  v_data_cast((float_cast ? real_dim_x*real_dim_y : 0),0),

@@ -40,10 +40,10 @@ class simulation {
 	public:
 	    lattice l;                 ///< lattice
 	    std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
-	    const float_type Re;       ///< Reynolds number
-	    const float_type Vmax;     ///< mean flow velocity
-	    const float_type visc;     ///< viscosity
-	    const float_type beta;     ///< LB parameter beta
+	    const scalar_t Re;       ///< Reynolds number
+	    const scalar_t Vmax;     ///< mean flow velocity
+	    const scalar_t visc;     ///< viscosity
+	    const scalar_t beta;     ///< LB parameter beta
 	    unsigned int time;         ///< simulation time
 	    bool file_output;          ///< flag whether to write files
 	    unsigned int output_freq;  ///< file output frequency
@@ -60,7 +60,7 @@ class simulation {
          *  @param[in] Re   Reynolds number
          *  @param[in] Vmax mean flow velocity
          */
-        simulation(unsigned int nx, unsigned int ny, float_type Re, float_type Vmax, CollisionType collisionType=CollisionType::LBGK)
+        simulation(unsigned int nx, unsigned int ny, scalar_t Re, scalar_t Vmax, CollisionType collisionType=CollisionType::LBGK)
                 : l(nx, ny),
                   shift(velocity_set().size),
                   Re(Re),
@@ -87,20 +87,20 @@ class simulation {
          */
         void taylor_green() {
 
-            float_type mach = Vmax / velocity_set().cs;
+            scalar_t mach = Vmax / velocity_set().cs;
 
-            float_type Kx = 2 * M_PI / l.nx;
-            float_type Ky = 2 * M_PI / l.ny;
+            scalar_t Kx = 2 * M_PI / l.nx;
+            scalar_t Ky = 2 * M_PI / l.ny;
 
-            float_type Ksqr = Kx * Kx + Ky * Ky;
+            scalar_t Ksqr = Kx * Kx + Ky * Ky;
 
             for(int i = 0; i < l.nx; i++) {
                 for(int j = 0; j < l.nx; j++) {
-                    float_type u = - Vmax * cos(Kx * i) * sin(Ky * j);
-                    float_type v = Vmax * cos(Ky * j) * sin(Kx * i);
-                    float_type rho = 1 - mach * mach / (2 * Ksqr) * (Ky*Ky*cos(2 * Kx * i) + Kx*Kx*sin(2 * Ky * j));
+                    scalar_t u = - Vmax * cos(Kx * i) * sin(Ky * j);
+                    scalar_t v = Vmax * cos(Ky * j) * sin(Kx * i);
+                    scalar_t rho = 1 - mach * mach / (2 * Ksqr) * (Ky * Ky * cos(2 * Kx * i) + Kx * Kx * sin(2 * Ky * j));
 
-                    float_type f_eq[9];
+                    scalar_t f_eq[9];
                     velocity_set().f_eq(f_eq, rho, u, v);
 
                     auto& node = l.get_node(i, j);
@@ -117,26 +117,26 @@ class simulation {
         }
 
         void doubly_periodic_shear_layer() {
-            float_type kappa = 80.0;
-            float_type delta = 0.05;
+            scalar_t kappa = 80.0;
+            scalar_t delta = 0.05;
 
-            float_type Kx = 2 * M_PI / l.nx;
+            scalar_t Kx = 2 * M_PI / l.nx;
 
 
             for(int i = 0; i < l.nx; i++) {
                 for(int j = 0; j < l.nx; j++) {
 
-                    float_type u;
+                    scalar_t u;
                     if (j <= l.ny / 2) {
-                        u = Vmax * tanh(kappa * (j / (float_type) l.ny - 0.25));
+                        u = Vmax * tanh(kappa * (j / (scalar_t) l.ny - 0.25));
                     } else {
-                        u = Vmax * tanh(kappa * (0.75 - j / (float_type) l.ny));
+                        u = Vmax * tanh(kappa * (0.75 - j / (scalar_t) l.ny));
                     }
 
-                    float_type v = Vmax * delta * sin(2 * M_PI * ((float_type) i / l.nx + 0.25));
-                    float_type rho = 1.0;
+                    scalar_t v = Vmax * delta * sin(2 * M_PI * ((scalar_t) i / l.nx + 0.25));
+                    scalar_t rho = 1.0;
 
-                    float_type f_eq[9];
+                    scalar_t f_eq[9];
                     velocity_set().f_eq(f_eq, rho, u, v);
 
                     auto& node = l.get_node(i, j);
@@ -310,16 +310,16 @@ class simulation {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);
 
-                    float_type rho = 0;
-                    float_type u = 0;
-                    float_type v = 0;
-                    float_type f[9];
+                    scalar_t rho = 0;
+                    scalar_t u = 0;
+                    scalar_t v = 0;
+                    scalar_t f[9];
 
                     for (int k = 0; k < velocity_set().size; k++) {
                         f[k] = l.f[k][idx];
                         rho += f[k];
-                        u += f[k] * (float_type) c[0][k];
-                        v += f[k] * (float_type) c[1][k];
+                        u += f[k] * (scalar_t) c[0][k];
+                        v += f[k] * (scalar_t) c[1][k];
                     }
 
                     u /= rho;
@@ -329,7 +329,7 @@ class simulation {
                     l.v[idx] = v;
                     l.rho[idx] = rho;
 
-	                float_type f_eq[9];
+	                scalar_t f_eq[9];
 	                velocity_set().f_eq(f_eq, rho, u, v);
 
 					for(int k = 0; k < velocity_set().size; k++) {
@@ -341,24 +341,24 @@ class simulation {
         }
 
         void collide_kbc() {
-
-	        static auto c = velocity_set().c;
+	        const static auto c = velocity_set().c;
+			const static auto nv = velocity_set().size;
 
             #pragma omp for
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);
 
-                    float_type rho = 0;
-                    float_type u = 0;
-                    float_type v = 0;
-                    float_type f[9];
+                    scalar_t rho = 0;
+                    scalar_t u = 0;
+                    scalar_t v = 0;
+                    scalar_t f[9];
 
-                    for (int k = 0; k < velocity_set().size; k++) {
+                    for (int k = 0; k < nv; k++) {
                         f[k] = l.f[k][idx];
                         rho += f[k];
-                        u += f[k] * (float_type) c[0][k];
-                        v += f[k] * (float_type) c[1][k];
+                        u += f[k] * (scalar_t) c[0][k];
+                        v += f[k] * (scalar_t) c[1][k];
                     }
 
                     u /= rho;
@@ -368,12 +368,20 @@ class simulation {
                     l.v[idx] = v;
                     l.rho[idx] = rho;
 
-                    float_type f_eq[9];
+                    scalar_t f_eq[9];
                     velocity_set().f_eq(f_eq, rho, u, v);
 
-                    for(int k = 0; k < velocity_set().size; k++) {
-                        l.f[k][idx] = f[k] + 2 * beta * (f_eq[k] - f[k]);
-                    }
+					scalar_t pi_xy_eq = 0;
+					scalar_t pi_xy = 0;
+					scalar_t n_eq = 0;
+	                scalar_t n;
+
+					for(int k = 0; k < nv; k++) {
+						pi_xy_eq += f_eq[k] * c[0][k] * c[1][k];
+						pi_xy += f[k] * c[0][k] * c[1][k];
+						n_eq += f_eq[k] * (c[0][k] * c[0][k] - c[1][k] * c[1][k]);
+						n += f[k] * (c[0][k] * c[0][k] - c[1][k] * c[1][k]);
+					}
 
 
                 }
@@ -397,7 +405,7 @@ class simulation {
                     break;
                 }
             }
-			
+
             // file io
             if (file_output && (((time + 1) % output_freq) == 0 || time == 0)) {
                 write_fields();

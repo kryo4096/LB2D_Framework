@@ -60,7 +60,7 @@ public: // access populations and macroscopic quantities
 	 *  @return Value of distribution function 
 	 *  @pre population index exists
 	 */
-	inline float_type f(unsigned int i) const;
+	inline scalar_t f(unsigned int i) const;
 	
 	/** 
 	 *  @brief Get/set population.
@@ -68,43 +68,43 @@ public: // access populations and macroscopic quantities
 	 *  @return Reference to value of distribution function 
 	 *  @pre population index exists
 	 */
-	inline float_type& f(unsigned int i);
+	inline scalar_t& f(unsigned int i);
 	
 	/** 
 	 *  @brief Get density.
 	 *  @return Local density
 	 */
-	inline float_type rho() const;
+	inline scalar_t rho() const;
 	
 	/** 
 	 *  @brief Get/set density.
 	 *  @return Reference to local density
 	 */
-	inline float_type& rho();
+	inline scalar_t& rho();
 	
 	/** 
 	 *  @brief Get x-velocity.
 	 *  @return Local flow velocity in x direction
 	 */
-	inline float_type u() const;
+	inline scalar_t u() const;
 	
 	/** 
 	 *  @brief Get/set x-velocity.
 	 *  @return Reference to local flow velocity in x direction
 	 */
-	inline float_type& u();
+	inline scalar_t& u();
 	
 	/** 
 	 *  @brief Get y-velocity.
 	 *  @return Local flow velocity in y direction
 	 */
-	inline float_type v() const;
+	inline scalar_t v() const;
 	
 	/** 
 	 *  @brief Get/set y-velocity.
 	 *  @return Reference to local flow velocity in y direction
 	 */
-	inline float_type& v();
+	inline scalar_t& v();
 
 public: // query and access properties
 	
@@ -338,10 +338,10 @@ public: // members
 	const unsigned int real_ny;               ///< extent in y direction including buffers
 	const unsigned int real_size;             ///< total number of nodes including buffers
 	const unsigned int n_populations;         ///< number of populations
-	std::vector<std::vector<float_type> > f;  ///< population data
-	std::vector<float_type> rho;              ///< density data
-	std::vector<float_type> u;                ///< flow x-velocity data
-	std::vector<float_type> v;                ///< flow y-velocity data
+	std::vector<std::vector<scalar_t> > f;  ///< population data
+	std::vector<scalar_t> rho;              ///< density data
+	std::vector<scalar_t> u;                ///< flow x-velocity data
+	std::vector<scalar_t> v;                ///< flow y-velocity data
 	std::vector<node> nodes;                  ///< array holding all node objects
 	std::vector<node> wall_nodes;             ///< array holding node objects belonging to a solid wall 
 	property_array properties;                ///< properties datastructure (can hold many different properties per node)
@@ -368,14 +368,14 @@ void node::set(lattice* lat, int i, int j)
 	coord.j = j;
 }
 
-inline float_type node::f(unsigned int i) const { return l->f[i][index]; }
-inline float_type& node::f(unsigned int i) { return l->f[i][index]; }
-inline float_type node::rho() const { return l->rho[index]; }
-inline float_type& node::rho() { return l->rho[index]; }
-inline float_type node::u() const { return l->u[index]; }
-inline float_type& node::u() { return l->u[index]; }
-inline float_type node::v() const { return l->v[index]; }
-inline float_type& node::v() { return l->v[index]; }
+inline scalar_t node::f(unsigned int i) const { return l->f[i][index]; }
+inline scalar_t& node::f(unsigned int i) { return l->f[i][index]; }
+inline scalar_t node::rho() const { return l->rho[index]; }
+inline scalar_t& node::rho() { return l->rho[index]; }
+inline scalar_t node::u() const { return l->u[index]; }
+inline scalar_t& node::u() { return l->u[index]; }
+inline scalar_t node::v() const { return l->v[index]; }
+inline scalar_t& node::v() { return l->v[index]; }
 
 inline bool node::has_flag_property(std::string name) const { return l->properties.has_flag_property(name, index); }
 inline bool node::set_flag_property(std::string name) { return l->properties.set_flag_property(name, index); }
@@ -396,7 +396,7 @@ const T& node::get_data_property(std::string name) const { return l->properties.
 lattice::lattice(unsigned int _nx, unsigned int _ny)
 : nx(_nx), ny(_ny), size(nx*ny), buffer_size(1), real_nx(nx+2*buffer_size), real_ny(ny+2*buffer_size),
   real_size(real_nx*real_ny), n_populations(velocity_set().size), 
-  f( n_populations, std::vector<float_type>(real_size, 0) ),
+  f( n_populations, std::vector<scalar_t>(real_size, 0) ),
   rho(real_size, 0), u(real_size, 0), v(real_size, 0), nodes(real_size),
   properties(real_size), periodic_x(true), periodic_y(true)
 {

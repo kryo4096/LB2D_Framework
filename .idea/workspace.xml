@@ -21,7 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/H_root.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/H_root.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lattice.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/lattice.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +91,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -94,11 +100,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.LB2D">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EasyBMP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="EasyBMP" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -144,6 +145,7 @@
       <workItem from="1639675817808" duration="2716000" />
       <workItem from="1639682185251" duration="4586000" />
       <workItem from="1639731696293" duration="10943000" />
+      <workItem from="1639920612508" duration="1000" />
     </task>
     <servers />
   </component>

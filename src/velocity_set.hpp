@@ -44,12 +44,12 @@ public:
 
 	
 	//                                                     0,       1,       2,       3,       4,       5,       6,       7,       8
-	const std::array<float_type, 9>         W =   {{ 16.0/36,  4.0/36,  4.0/36,  4.0/36,  4.0/36,  1.0/36,  1.0/36,  1.0/36,  1.0/36}};   ///< Lattice weights
+	const std::array<scalar_t, 9>         W =   {{16.0 / 36, 4.0 / 36, 4.0 / 36, 4.0 / 36, 4.0 / 36, 1.0 / 36, 1.0 / 36, 1.0 / 36, 1.0 / 36}};   ///< Lattice weights
 	
 	const std::array<std::array<int, 9>, 2> c = {{{{       0,       1,       0,      -1,       0,       1,      -1,      -1,       1}}, 
 	                                              {{       0,       0,       1,       0,      -1,       1,       1,      -1,      -1}}}}; ///< Molecular velocities
 	
-	const float_type cs = 1.0/std::sqrt(3.0);   ///< Speed of sound
+	const scalar_t cs = 1.0 / std::sqrt(3.0);   ///< Speed of sound
 	
 	const unsigned int size = 9;                ///< Number of velocities
 
@@ -63,7 +63,7 @@ public:
 	 *  @param[in]     u    Local flow velocity in x-direction
 	 *  @param[in]     v    Local flow velocity in y-direction
 	 */
-	inline void f_eq(float_type* f_eq, float_type rho, float_type u, float_type v) const
+	inline void f_eq(scalar_t* f_eq, scalar_t rho, scalar_t u, scalar_t v) const
 	{
 
 		float x_root = sqrtf(1 + 3 * u * u);
@@ -96,9 +96,9 @@ public:
 	 *  @param[in]     v    Local flow velocity in y-direction
 	 */
 	template <typename Node>
-	inline void equilibrate(Node& n, float_type rho, float_type u, float_type v) const
+	inline void equilibrate(Node& n, scalar_t rho, scalar_t u, scalar_t v) const
 	{
-		float_type f[9];
+		scalar_t f[9];
 		f_eq(f, rho, u, v);
 		n.f(0) = f[0];
 		n.f(1) = f[1];
