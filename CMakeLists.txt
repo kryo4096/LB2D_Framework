@@ -11,6 +11,7 @@ add_subdirectory(./third_party/EasyBMP)
 find_package(GLEW REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(OpenMP REQUIRED)
 
 if (MSVC)
     set_target_properties(
@@ -23,6 +24,6 @@ endif (MSVC)
 
 if (UNIX)
     find_package(X11 REQUIRED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -O3 -march=native")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}-O3 -march=native -fopenmp")
     target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW X11 EasyBMP)
 endif (UNIX)

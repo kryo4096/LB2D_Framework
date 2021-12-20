@@ -44,7 +44,7 @@ public:
 
 	
 	//                                                     0,       1,       2,       3,       4,       5,       6,       7,       8
-	const std::array<scalar_t, 9>         W =   {{16.0 / 36, 4.0 / 36, 4.0 / 36, 4.0 / 36, 4.0 / 36, 1.0 / 36, 1.0 / 36, 1.0 / 36, 1.0 / 36}};   ///< Lattice weights
+	const std::array<scalar_t, 9>         W =   {{16.0f / 36.0f, 4.0f / 36.0f, 4.0f / 36.0f, 4.0f / 36.0f, 4.0f / 36.0f, 1.0f / 36.0f, 1.0f / 36.0f, 1.0f / 36.0f, 1.0f / 36.0f}};   ///< Lattice weights
 	
 	const std::array<std::array<int, 9>, 2> c = {{{{       0,       1,       0,      -1,       0,       1,      -1,      -1,       1}}, 
 	                                              {{       0,       0,       1,       0,      -1,       1,       1,      -1,      -1}}}}; ///< Molecular velocities

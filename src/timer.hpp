@@ -10,6 +10,10 @@
 class Timer
 {
 public:
+	Timer() : m_StartTime(std::chrono::steady_clock::now()) {
+
+	}
+
     void start()
     {
         m_StartTime = std::chrono::steady_clock::now();
@@ -22,26 +26,22 @@ public:
         m_bRunning = false;
     }
 
-    double elapsedMilliseconds()
-    {
-        std::chrono::time_point<std::chrono::steady_clock> endTime;
+	template<typename U>
+	double elapsed()
+	{
+		std::chrono::time_point<std::chrono::steady_clock> endTime;
 
-        if(m_bRunning)
-        {
-            endTime = std::chrono::steady_clock::now();
-        }
-        else
-        {
-            endTime = m_EndTime;
-        }
+		if(m_bRunning)
+		{
+			endTime = std::chrono::steady_clock::now();
+		}
+		else
+		{
+			endTime = m_EndTime;
+		}
 
-        return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - m_StartTime).count();
-    }
-
-    double elapsedSeconds()
-    {
-        return elapsedMilliseconds() / 1000.0;
-    }
+		return std::chrono::duration_cast<U>(endTime - m_StartTime).count();
+	}
 
 private:
     std::chrono::time_point<std::chrono::steady_clock> m_StartTime;

@@ -1,12 +1,14 @@
+#pragma STDC FENV_ACCESS ON
 
 #include "simulation.hpp"
 #include "visualization.hpp"
 #include <omp.h>
 #include <filesystem>
+#include <cfenv>
 
 namespace lb {
     void visual_sim(int argc, char *argv[]) {
-        auto *sim = new simulation(256, 256, 1000.0, 0.1);
+        auto *sim = new simulation(128, 128, 300000000, 0.04, lb::CollisionType::KBC);
         sim->doubly_periodic_shear_layer();
         std::cout << *sim << std::endl;
 
@@ -38,7 +40,7 @@ namespace lb {
 
             int L = start_size * powf(2, n * log_step_size);
 
-            auto *sim = new simulation(L, L, Re, Vmax);
+            auto *sim = new simulation(L, L, Re, Vmax, lb::CollisionType::KBC);
             sim->taylor_green();
 
             int nx = sim->l.nx;
@@ -84,7 +86,8 @@ namespace lb {
 
 int main(int argc, char *argv[])
 {
-	omp_set_num_threads(6);
+	omp_set_num_threads(11);
+	feenableexcept(FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
     std::string mode;
 
@@ -95,7 +98,7 @@ int main(int argc, char *argv[])
     }
 
     if (mode == "visual") lb::visual_sim(argc, argv);
-    if (mode == "taylor_green_convergence") lb::convergence_test(25, 128, 0.125, 100, 0.05, 1e4);
+    if (mode == "taylor_green_convergence") lb::convergence_test(33, 128, 0.125, 10, 0.1, 1e12);
     else {
         std::cerr << "ERROR: " << mode << " is not a valid mode." << std::endl;
         return -1;

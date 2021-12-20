@@ -120,9 +120,6 @@ class simulation {
             scalar_t kappa = 80.0;
             scalar_t delta = 0.05;
 
-            scalar_t Kx = 2 * M_PI / l.nx;
-
-
             for(int i = 0; i < l.nx; i++) {
                 for(int j = 0; j < l.nx; j++) {
 
@@ -300,6 +297,37 @@ class simulation {
             }
         }
 
+		inline static void zero(scalar_t* f) {
+			for(int i = 0; i < 9; i++) {
+				f[i] = 0.0;
+			}
+		}
+		/*
+		inline static void f_to_D(const scalar_t* f, scalar_t* D) {
+			D[0] = f[0] + f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8];
+			D[1] = f[1] - f[3] + f[5] - f[6] - f[7] + f[8];
+			D[2] = f[2] - f[4] + f[5] + f[6] - f[7] - f[8];
+			D[3] = f[1] + f[2] + f[3] + f[4] + 2 * (f[5] + f[6] + f[7] + f[8]);
+			D[4] = f[1] - f[2] + f[3] - f[4];
+			D[5] = f[5] - f[6] + f[7] - f[8];
+			D[6] = f[5] + f[6] - f[7] - f[8];
+			D[7] = f[5] - f[6] - f[7] + f[8];
+			D[8] = f[5] + f[6] + f[7] + f[8];
+		}
+
+		inline static void D_to_f(const scalar_t* D, scalar_t* f) {
+			f[0] += D[0] - D[3] + D[8];
+			f[1] += 0.5 * (0.5 * (D[3] + D[4]) + D[1] - D[7] - D[8]);
+			f[2] += 0.5 * (0.5 * (D[3] - D[4]) + D[2] - D[6] - D[8]);
+			f[3] += 0.5 * (0.5 * (D[3] + D[4]) - D[1] + D[7] - D[8]);
+			f[4] += 0.5 * (0.5 * (D[3] - D[4]) - D[2] + D[6] - D[8]);
+			f[5] += 0.25 * (D[8] + D[5] + D[7] + D[6]);
+			f[6] += 0.25 * (D[8] - D[5] - D[7] + D[6]);
+			f[7] += 0.25 * (D[8] + D[5] - D[7] - D[6]);
+			f[8] += 0.25 * (D[8] - D[5] + D[7] - D[6]);
+		}*/
+
+
         /** @brief collide the populations */
         void collide_lbgk() {
 	        #pragma omp for schedule(static)
@@ -308,7 +336,6 @@ class simulation {
                     int idx = l.index(i, j);
 
                     scalar_t f[9];
-
                     for (int k = 0; k < 9; k++) {
                         f[k] = l.f[k][idx];
                     }
@@ -317,22 +344,22 @@ class simulation {
 	                scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
 	                scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-	                float x_root = sqrtf(1 + 3 * u * u);
-	                float y_root = sqrtf(1 + 3 * v * v);
+	                scalar_t x_root = sqrtf(1 + 3 * u * u);
+	                scalar_t y_root = sqrtf(1 + 3 * v * v);
 
-	                float A = rho * (2 - x_root) * (2 - y_root);
-	                float BX = (2 * u + x_root) / (1 - u);
-	                float BY = (2 * v + y_root) / (1 - v);
+	                scalar_t A = rho * (2 - x_root) * (2 - y_root);
+	                scalar_t BX = (2 * u + x_root) / (1 - u);
+	                scalar_t BY = (2 * v + y_root) / (1 - v);
 
-	                l.f[0][idx] = f[0] + 2 * beta * (16.0/36.0 * A - f[0]);
-	                l.f[1][idx] = f[1] + 2 * beta * (4.0/36.0 * A * BX - f[1]);
-	                l.f[2][idx] = f[2] + 2 * beta * (4.0/36.0 * A * BY - f[2]);
-	                l.f[3][idx] = f[3] + 2 * beta * (4.0/36.0 * A / BX - f[3]);
-	                l.f[4][idx] = f[4] + 2 * beta * (4.0/36.0 * A / BY - f[4]);
-	                l.f[5][idx] = f[5] + 2 * beta * (1.0/36.0 * A * BX * BY - f[5]);
-	                l.f[6][idx]= f[6] + 2 * beta * (1.0/36.0 * A / BX * BY - f[6]);
-	                l.f[7][idx] = f[7] + 2 * beta * (1.0/36.0 * A / BX / BY - f[7]);
-	                l.f[8][idx] = f[8] + 2 * beta * (1.0/36.0 * A * BX / BY - f[8]);
+	                l.f[0][idx] = f[0] + 2 * beta * (16.0f/36.0f * A - f[0]);
+	                l.f[1][idx] = f[1] + 2 * beta * (4.0f/36.0f * A * BX - f[1]);
+	                l.f[2][idx] = f[2] + 2 * beta * (4.0f/36.0f * A * BY - f[2]);
+	                l.f[3][idx] = f[3] + 2 * beta * (4.0f/36.0f * A / BX - f[3]);
+	                l.f[4][idx] = f[4] + 2 * beta * (4.0f/36.0f * A / BY - f[4]);
+	                l.f[5][idx] = f[5] + 2 * beta * (1.0f/36.0f * A * BX * BY - f[5]);
+	                l.f[6][idx] = f[6] + 2 * beta * (1.0f/36.0f * A / BX * BY - f[6]);
+	                l.f[7][idx] = f[7] + 2 * beta * (1.0f/36.0f * A / BX / BY - f[7]);
+	                l.f[8][idx] = f[8] + 2 * beta * (1.0f/36.0f * A * BX / BY - f[8]);
 
 	                l.u[idx] = u;
 	                l.v[idx] = v;
@@ -343,76 +370,107 @@ class simulation {
         }
 
         void collide_kbc() {
-	        const static auto c = velocity_set().c;
-			const static auto nv = velocity_set().size;
+			#pragma omp for schedule(static)
+	        for (int j = 0; j < static_cast<int>(l.ny); ++j) {
+		        for (int i = 0; i < static_cast<int>(l.nx); ++i) {
+			        int idx = l.index(i, j);
 
-            //#pragma omp for
-            for (int j = 0; j < static_cast<int>(l.ny); ++j) {
-                for (int i = 0; i < static_cast<int>(l.nx); ++i) {
-                    int idx = l.index(i, j);
+			        scalar_t f[9];
 
-                    scalar_t rho = 0;
-                    scalar_t u = 0;
-                    scalar_t v = 0;
-                    scalar_t f[9];
+			        for (int k = 0; k < 9; k++) {
+				        f[k] = l.f[k][idx];
+			        }
 
-                    for (int k = 0; k < nv; k++) {
-                        f[k] = l.f[k][idx];
-                        rho += f[k];
-                        u += f[k] * (scalar_t) c[0][k];
-                        v += f[k] * (scalar_t) c[1][k];
-                    }
+			        scalar_t rho = f[0] + f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8];
+			        scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
+			        scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-                    u /= rho;
-                    v /= rho;
+			        scalar_t x_root = sqrtf(1 + 3 * u * u);
+			        scalar_t y_root = sqrtf(1 + 3 * v * v);
 
-                    l.u[idx] = u;
-                    l.v[idx] = v;
-                    l.rho[idx] = rho;
+			        scalar_t A = rho * (2 - x_root) * (2 - y_root);
+			        scalar_t BX = (2 * u + x_root) / (1 - u);
+			        scalar_t BY = (2 * v + y_root) / (1 - v);
+					
+					scalar_t f_eq[9];
 
-                    scalar_t f_eq[9];
-                    velocity_set().f_eq(f_eq, rho, u, v);
+			        f_eq[0] = 16.0f/36.0f * A;
+			        f_eq[1] = 4.0f/36.0f * A * BX;
+			        f_eq[2] = 4.0f/36.0f * A * BY;
+			        f_eq[3] = 4.0f/36.0f * A / BX;
+			        f_eq[4] = 4.0f/36.0f * A / BY;
+			        f_eq[5] = 1.0f/36.0f * A * BX * BY;
+			        f_eq[6] = 1.0f/36.0f * A / BX * BY;
+			        f_eq[7] = 1.0f/36.0f * A / BX / BY;
+			        f_eq[8] = 1.0f/36.0f * A * BX / BY;
 
-					scalar_t pi_xy_eq = 0;
-					scalar_t pi_xy = 0;
-					scalar_t n_eq = 0;
-	                scalar_t n;
+			        scalar_t Pi = f[5] - f[6] + f[7] - f[8];
+			        scalar_t N = f[1] - f[2] + f[3] - f[4];
+			        scalar_t Pi_eq = f_eq[5] - f_eq[6] + f_eq[7] - f_eq[8];
+			        scalar_t N_eq = f_eq[1] - f_eq[2] + f_eq[3] - f_eq[4];
 
-					for(int k = 0; k < nv; k++) {
-						pi_xy_eq += f_eq[k] * c[0][k] * c[1][k];
-						pi_xy += f[k] * c[0][k] * c[1][k];
-						n_eq += f_eq[k] * (c[0][k] * c[0][k] - c[1][k] * c[1][k]);
-						n += f[k] * (c[0][k] * c[0][k] - c[1][k] * c[1][k]);
+					scalar_t delta_s[9];
+
+			        delta_s[0] = 0;
+			        delta_s[1] = 0.25f * (N - N_eq);
+			        delta_s[2] = - 0.25f * (N - N_eq);
+			        delta_s[3] = 0.25f * (N - N_eq);
+			        delta_s[4] = - 0.25f * (N - N_eq);
+					delta_s[5] = 0.25f * (Pi - Pi_eq);
+			        delta_s[6] = - 0.25f * (Pi - Pi_eq);
+			        delta_s[7] = 0.25f * (Pi - Pi_eq);
+			        delta_s[8] = - 0.25f * (Pi - Pi_eq);
+
+					scalar_t delta_h[9];
+			        scalar_t dsdh = 0;
+			        scalar_t dhdh = 0;
+
+					for(int k = 0; k < 9; k++) {
+						delta_h[k] = f[k] - f_eq[k] - delta_s[k];
+						dsdh += delta_h[k] * delta_s[k] / f_eq[k];
+						dhdh += delta_h[k] * delta_h[k] / f_eq[k];
 					}
 
+					scalar_t gamma = 1 / beta - (2 - 1 / beta) * dsdh / dhdh;
 
-                }
-            }
+			        for(int k = 0; k < 9; k++) {
+				        l.f[k][idx] -= beta * (2 * delta_s[k] + gamma * delta_h[k]);
+			        }
+
+			        l.u[idx] = u;
+			        l.v[idx] = v;
+			        l.rho[idx] = gamma;
+		        }
+	        }
         }
 
         /** @brief LB step */
         void step() {
-            #pragma omp parallel
-            advect();
+	        switch (collisionType) {
+		        case CollisionType::LBGK: {
+					#pragma omp parallel
+					{
+				        advect();
+				        collide_lbgk();
+		            }
+			        break;
+		        }
+		        case CollisionType::KBC: {
+					#pragma omp parallel
+			        {
+				        advect();
+				        collide_kbc();
+			        }
+			        break;
+		        }
+	        }
 
-            switch ( collisionType ){
-                case CollisionType::LBGK: {
-                    #pragma omp parallel
-                    collide_lbgk();
-                    break;
-                }
-                case CollisionType::KBC: {
-                    #pragma omp parallel
-                    collide_kbc();
-                    break;
-                }
-            }
-
+			/*
             // file io
             if (file_output && (((time + 1) % output_freq) == 0 || time == 0)) {
                 write_fields();
                 ++output_index;
-            }
+            }*/
 
             ++time;
         }
