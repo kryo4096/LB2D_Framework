@@ -149,10 +149,6 @@ class simulation {
             }
         }
 
-        void initialize() {
-
-        }
-
         /**
          *  @brief advect the populations
          *
@@ -297,37 +293,6 @@ class simulation {
             }
         }
 
-		inline static void zero(scalar_t* f) {
-			for(int i = 0; i < 9; i++) {
-				f[i] = 0.0;
-			}
-		}
-		/*
-		inline static void f_to_D(const scalar_t* f, scalar_t* D) {
-			D[0] = f[0] + f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8];
-			D[1] = f[1] - f[3] + f[5] - f[6] - f[7] + f[8];
-			D[2] = f[2] - f[4] + f[5] + f[6] - f[7] - f[8];
-			D[3] = f[1] + f[2] + f[3] + f[4] + 2 * (f[5] + f[6] + f[7] + f[8]);
-			D[4] = f[1] - f[2] + f[3] - f[4];
-			D[5] = f[5] - f[6] + f[7] - f[8];
-			D[6] = f[5] + f[6] - f[7] - f[8];
-			D[7] = f[5] - f[6] - f[7] + f[8];
-			D[8] = f[5] + f[6] + f[7] + f[8];
-		}
-
-		inline static void D_to_f(const scalar_t* D, scalar_t* f) {
-			f[0] += D[0] - D[3] + D[8];
-			f[1] += 0.5 * (0.5 * (D[3] + D[4]) + D[1] - D[7] - D[8]);
-			f[2] += 0.5 * (0.5 * (D[3] - D[4]) + D[2] - D[6] - D[8]);
-			f[3] += 0.5 * (0.5 * (D[3] + D[4]) - D[1] + D[7] - D[8]);
-			f[4] += 0.5 * (0.5 * (D[3] - D[4]) - D[2] + D[6] - D[8]);
-			f[5] += 0.25 * (D[8] + D[5] + D[7] + D[6]);
-			f[6] += 0.25 * (D[8] - D[5] - D[7] + D[6]);
-			f[7] += 0.25 * (D[8] + D[5] - D[7] - D[6]);
-			f[8] += 0.25 * (D[8] - D[5] + D[7] - D[6]);
-		}*/
-
-
         /** @brief collide the populations */
         void collide_lbgk() {
 	        #pragma omp for schedule(static)
@@ -344,22 +309,22 @@ class simulation {
 	                scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
 	                scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-	                scalar_t x_root = sqrtf(1 + 3 * u * u);
-	                scalar_t y_root = sqrtf(1 + 3 * v * v);
+	                scalar_t x_root = sqrt(1 + 3 * u * u);
+	                scalar_t y_root = sqrt(1 + 3 * v * v);
 
 	                scalar_t A = rho * (2 - x_root) * (2 - y_root);
 	                scalar_t BX = (2 * u + x_root) / (1 - u);
 	                scalar_t BY = (2 * v + y_root) / (1 - v);
 
-	                l.f[0][idx] = f[0] + 2 * beta * (16.0f/36.0f * A - f[0]);
-	                l.f[1][idx] = f[1] + 2 * beta * (4.0f/36.0f * A * BX - f[1]);
-	                l.f[2][idx] = f[2] + 2 * beta * (4.0f/36.0f * A * BY - f[2]);
-	                l.f[3][idx] = f[3] + 2 * beta * (4.0f/36.0f * A / BX - f[3]);
-	                l.f[4][idx] = f[4] + 2 * beta * (4.0f/36.0f * A / BY - f[4]);
-	                l.f[5][idx] = f[5] + 2 * beta * (1.0f/36.0f * A * BX * BY - f[5]);
-	                l.f[6][idx] = f[6] + 2 * beta * (1.0f/36.0f * A / BX * BY - f[6]);
-	                l.f[7][idx] = f[7] + 2 * beta * (1.0f/36.0f * A / BX / BY - f[7]);
-	                l.f[8][idx] = f[8] + 2 * beta * (1.0f/36.0f * A * BX / BY - f[8]);
+	                l.f[0][idx] = f[0] + 2 * beta * (16.0/36.0 * A - f[0]);
+	                l.f[1][idx] = f[1] + 2 * beta * (4.0/36.0 * A * BX - f[1]);
+	                l.f[2][idx] = f[2] + 2 * beta * (4.0/36.0 * A * BY - f[2]);
+	                l.f[3][idx] = f[3] + 2 * beta * (4.0/36.0 * A / BX - f[3]);
+	                l.f[4][idx] = f[4] + 2 * beta * (4.0/36.0 * A / BY - f[4]);
+	                l.f[5][idx] = f[5] + 2 * beta * (1.0/36.0 * A * BX * BY - f[5]);
+	                l.f[6][idx] = f[6] + 2 * beta * (1.0/36.0 * A / BX * BY - f[6]);
+	                l.f[7][idx] = f[7] + 2 * beta * (1.0/36.0 * A / BX / BY - f[7]);
+	                l.f[8][idx] = f[8] + 2 * beta * (1.0/36.0 * A * BX / BY - f[8]);
 
 	                l.u[idx] = u;
 	                l.v[idx] = v;
@@ -385,8 +350,8 @@ class simulation {
 			        scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
 			        scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-			        scalar_t x_root = sqrtf(1 + 3 * u * u);
-			        scalar_t y_root = sqrtf(1 + 3 * v * v);
+			        scalar_t x_root = sqrt(1 + 3 * u * u);
+			        scalar_t y_root = sqrt(1 + 3 * v * v);
 
 			        scalar_t A = rho * (2 - x_root) * (2 - y_root);
 			        scalar_t BX = (2 * u + x_root) / (1 - u);
@@ -394,15 +359,15 @@ class simulation {
 					
 					scalar_t f_eq[9];
 
-			        f_eq[0] = 16.0f/36.0f * A;
-			        f_eq[1] = 4.0f/36.0f * A * BX;
-			        f_eq[2] = 4.0f/36.0f * A * BY;
-			        f_eq[3] = 4.0f/36.0f * A / BX;
-			        f_eq[4] = 4.0f/36.0f * A / BY;
-			        f_eq[5] = 1.0f/36.0f * A * BX * BY;
-			        f_eq[6] = 1.0f/36.0f * A / BX * BY;
-			        f_eq[7] = 1.0f/36.0f * A / BX / BY;
-			        f_eq[8] = 1.0f/36.0f * A * BX / BY;
+			        f_eq[0] = 16.0/36.0 * A;
+			        f_eq[1] = 4.0/36.0 * A * BX;
+			        f_eq[2] = 4.0/36.0 * A * BY;
+			        f_eq[3] = 4.0/36.0 * A / BX;
+			        f_eq[4] = 4.0/36.0 * A / BY;
+			        f_eq[5] = 1.0/36.0 * A * BX * BY;
+			        f_eq[6] = 1.0/36.0 * A / BX * BY;
+			        f_eq[7] = 1.0/36.0 * A / BX / BY;
+			        f_eq[8] = 1.0/36.0 * A * BX / BY;
 
 			        scalar_t Pi = f[5] - f[6] + f[7] - f[8];
 			        scalar_t N = f[1] - f[2] + f[3] - f[4];

@@ -1,14 +1,11 @@
-#pragma STDC FENV_ACCESS ON
-
 #include "simulation.hpp"
 #include "visualization.hpp"
 #include <omp.h>
 #include <filesystem>
-#include <cfenv>
 
 namespace lb {
     void visual_sim(int argc, char *argv[]) {
-        auto *sim = new simulation(128, 128, 300000000, 0.04, lb::CollisionType::KBC);
+        auto *sim = new simulation(512, 512, 300000, 0.05, lb::CollisionType::KBC);
         sim->doubly_periodic_shear_layer();
         std::cout << *sim << std::endl;
 
@@ -69,7 +66,6 @@ namespace lb {
                 }
             }
 
-
             std::cout << L << ", \t" << l2error;
 
             errors.push_back(l2error);
@@ -87,7 +83,6 @@ namespace lb {
 int main(int argc, char *argv[])
 {
 	omp_set_num_threads(11);
-	feenableexcept(FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
     std::string mode;
 

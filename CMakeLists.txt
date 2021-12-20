@@ -18,12 +18,12 @@ if (MSVC)
             LB2D PROPERTIES
             VS_DEBUGGER_WORKING_DIRECTORY "./"
     )
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp:experimental /O3 /std:c++20 /arch:AVX2")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp:experimental /O2 /std:c++20 /arch:AVX2")
     target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW EasyBMP)
 endif (MSVC)
 
 if (UNIX)
     find_package(X11 REQUIRED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}-O3 -march=native -fopenmp")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -fopenmp")
     target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW X11 EasyBMP)
 endif (UNIX)
