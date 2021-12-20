@@ -302,39 +302,41 @@ class simulation {
 
         /** @brief collide the populations */
         void collide_lbgk() {
-
-            static auto c = velocity_set().c;
-
-            #pragma omp for schedule(static)
+	        #pragma omp for schedule(static)
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);
 
-                    scalar_t rho = 0;
-                    scalar_t u = 0;
-                    scalar_t v = 0;
                     scalar_t f[9];
 
-                    for (int k = 0; k < velocity_set().size; k++) {
+                    for (int k = 0; k < 9; k++) {
                         f[k] = l.f[k][idx];
-                        rho += f[k];
-                        u += f[k] * (scalar_t) c[0][k];
-                        v += f[k] * (scalar_t) c[1][k];
                     }
 
-                    u /= rho;
-                    v /= rho;
+	                scalar_t rho = f[0] + f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8];
+	                scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
+	                scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-                    l.u[idx] = u;
-                    l.v[idx] = v;
-                    l.rho[idx] = rho;
+	                float x_root = sqrtf(1 + 3 * u * u);
+	                float y_root = sqrtf(1 + 3 * v * v);
 
-	                scalar_t f_eq[9];
-	                velocity_set().f_eq(f_eq, rho, u, v);
+	                float A = rho * (2 - x_root) * (2 - y_root);
+	                float BX = (2 * u + x_root) / (1 - u);
+	                float BY = (2 * v + y_root) / (1 - v);
 
-					for(int k = 0; k < velocity_set().size; k++) {
-						l.f[k][idx] = f[k] + 2 * beta * (f_eq[k] - f[k]);
-					}
+	                l.f[0][idx] = f[0] + 2 * beta * (16.0/36.0 * A - f[0]);
+	                l.f[1][idx] = f[1] + 2 * beta * (4.0/36.0 * A * BX - f[1]);
+	                l.f[2][idx] = f[2] + 2 * beta * (4.0/36.0 * A * BY - f[2]);
+	                l.f[3][idx] = f[3] + 2 * beta * (4.0/36.0 * A / BX - f[3]);
+	                l.f[4][idx] = f[4] + 2 * beta * (4.0/36.0 * A / BY - f[4]);
+	                l.f[5][idx] = f[5] + 2 * beta * (1.0/36.0 * A * BX * BY - f[5]);
+	                l.f[6][idx]= f[6] + 2 * beta * (1.0/36.0 * A / BX * BY - f[6]);
+	                l.f[7][idx] = f[7] + 2 * beta * (1.0/36.0 * A / BX / BY - f[7]);
+	                l.f[8][idx] = f[8] + 2 * beta * (1.0/36.0 * A * BX / BY - f[8]);
+
+	                l.u[idx] = u;
+	                l.v[idx] = v;
+	                l.rho[idx] = rho;
                 }
             }
 
@@ -344,7 +346,7 @@ class simulation {
 	        const static auto c = velocity_set().c;
 			const static auto nv = velocity_set().size;
 
-            #pragma omp for
+            //#pragma omp for
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);

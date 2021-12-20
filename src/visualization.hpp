@@ -115,7 +115,7 @@ private: // ctors
 	  wall_drawing_mode(false)
 	{
 		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+		glutInitDisplayMode(GLUT_RGBA);
 		glutInitWindowPosition(100,100);
 		glutInitWindowSize(width,height);
 		glutCreateWindow("2D Lattice Boltzmann");

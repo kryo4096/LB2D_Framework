@@ -73,14 +73,15 @@ public:
 		float BX = (2 * u + x_root) / (1 - u);
 		float BY = (2 * v + y_root) / (1 - v);
 
-		for(int i = 0; i < velocity_set().size; i++) {
-			float w = velocity_set().W[i];
-
-			float cx = velocity_set().c[0][i];
-			float cy = velocity_set().c[1][i];
-			
-			f_eq[i] = w * A * powf(BX, cx) * powf(BY, cy);
-		}
+		f_eq[0] = 16.0/36.0 * A;
+		f_eq[1] = 4.0/36.0 * (A * BX);
+		f_eq[2] = 4.0/36.0 * (A * BY);
+		f_eq[3] = 4.0/36.0 * (A / BX);
+		f_eq[4] = 4.0/36.0 * (A / BY);
+		f_eq[5] = 1.0/36.0 * (A * BX * BY);
+		f_eq[6] = 1.0/36.0 * (A / BX * BY);
+		f_eq[7] = 1.0/36.0 * (A / BX / BY);
+		f_eq[8] = 1.0/36.0 * (A * BX / BY);
 	}
 
 	/** 
