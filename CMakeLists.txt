@@ -24,6 +24,6 @@ endif (MSVC)
 
 if (UNIX)
     find_package(X11 REQUIRED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -fopenmp")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -fopenmp -Ofast -ffinite-math-only -funroll-loops")
     target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW X11 EasyBMP)
 endif (UNIX)

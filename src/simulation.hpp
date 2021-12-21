@@ -13,12 +13,13 @@
 #include "H_root.hpp"
 #include "lattice.hpp"
 #include "timer.hpp"
+#include "mathutils.h"
+
 #include <sstream>
 #include <random>
 
-
-
 #include <omp.h>
+#include <cassert>
 
 namespace lb {
 
@@ -35,6 +36,15 @@ enum CollisionType {
     LBGK,
     KBC
 };
+
+const std::string CollisionTypeNames[]  {
+    "LBGK",
+    "KBC"
+};
+
+std::ostream& operator<<(std::ostream& os, CollisionType type) {
+    return os << CollisionTypeNames[type];
+}
 
 class simulation {
 	public:
@@ -121,7 +131,7 @@ class simulation {
             scalar_t delta = 0.05;
 
             for(int i = 0; i < l.nx; i++) {
-                for(int j = 0; j < l.nx; j++) {
+                for(int j = 0; j < l.ny; j++) {
 
                     scalar_t u;
                     if (j <= l.ny / 2) {
@@ -309,8 +319,8 @@ class simulation {
 	                scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
 	                scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-	                scalar_t x_root = sqrt(1 + 3 * u * u);
-	                scalar_t y_root = sqrt(1 + 3 * v * v);
+	                scalar_t x_root = std::sqrt(1 + 3 * u * u);
+	                scalar_t y_root = std::sqrt(1 + 3 * v * v);
 
 	                scalar_t A = rho * (2 - x_root) * (2 - y_root);
 	                scalar_t BX = (2 * u + x_root) / (1 - u);
@@ -335,12 +345,15 @@ class simulation {
         }
 
         void collide_kbc() {
-			#pragma omp for schedule(static)
+            scalar_t f[9];
+            scalar_t f_eq[9];
+            scalar_t delta_s[9];
+            scalar_t delta_h[9];
+
+            #pragma omp for schedule(static)
 	        for (int j = 0; j < static_cast<int>(l.ny); ++j) {
 		        for (int i = 0; i < static_cast<int>(l.nx); ++i) {
 			        int idx = l.index(i, j);
-
-			        scalar_t f[9];
 
 			        for (int k = 0; k < 9; k++) {
 				        f[k] = l.f[k][idx];
@@ -350,14 +363,14 @@ class simulation {
 			        scalar_t u = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
 			        scalar_t v = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
 
-			        scalar_t x_root = sqrt(1 + 3 * u * u);
-			        scalar_t y_root = sqrt(1 + 3 * v * v);
+			        scalar_t x_root = std::sqrt(1 + 3 * u * u);
+			        scalar_t y_root = std::sqrt(1 + 3 * v * v);
 
 			        scalar_t A = rho * (2 - x_root) * (2 - y_root);
 			        scalar_t BX = (2 * u + x_root) / (1 - u);
 			        scalar_t BY = (2 * v + y_root) / (1 - v);
 					
-					scalar_t f_eq[9];
+
 
 			        f_eq[0] = 16.0/36.0 * A;
 			        f_eq[1] = 4.0/36.0 * A * BX;
@@ -374,7 +387,7 @@ class simulation {
 			        scalar_t Pi_eq = f_eq[5] - f_eq[6] + f_eq[7] - f_eq[8];
 			        scalar_t N_eq = f_eq[1] - f_eq[2] + f_eq[3] - f_eq[4];
 
-					scalar_t delta_s[9];
+
 
 			        delta_s[0] = 0;
 			        delta_s[1] = 0.25f * (N - N_eq);
@@ -386,17 +399,17 @@ class simulation {
 			        delta_s[7] = 0.25f * (Pi - Pi_eq);
 			        delta_s[8] = - 0.25f * (Pi - Pi_eq);
 
-					scalar_t delta_h[9];
-			        scalar_t dsdh = 0;
-			        scalar_t dhdh = 0;
+
+			        scalar_t ds_dh = 0;
+			        scalar_t dh_dh = 0;
 
 					for(int k = 0; k < 9; k++) {
 						delta_h[k] = f[k] - f_eq[k] - delta_s[k];
-						dsdh += delta_h[k] * delta_s[k] / f_eq[k];
-						dhdh += delta_h[k] * delta_h[k] / f_eq[k];
+                        ds_dh += delta_h[k] * delta_s[k] / f_eq[k];
+                        dh_dh += delta_h[k] * delta_h[k] / f_eq[k];
 					}
 
-					scalar_t gamma = 1 / beta - (2 - 1 / beta) * dsdh / dhdh;
+					scalar_t gamma = 1 / beta - (2 - 1 / beta) * ds_dh / dh_dh;
 
 			        for(int k = 0; k < 9; k++) {
 				        l.f[k][idx] -= beta * (2 * delta_s[k] + gamma * delta_h[k]);
@@ -451,6 +464,7 @@ class simulation {
         friend std::ostream &operator<<(std::ostream &os, const simulation &sim) {
             os << "simulation parameters\n"
                << "---------------------\n";
+            os << "collision type: " << sim.collisionType << "\n";
             os << "domain: " << sim.l.nx << " x " << sim.l.ny << "\n";
             os << "Re:     " << sim.Re << "\n";
             os << "Vmax:   " << sim.Vmax << "\n";

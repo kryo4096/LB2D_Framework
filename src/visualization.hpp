@@ -115,7 +115,7 @@ private: // ctors
 	  wall_drawing_mode(false)
 	{
 		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_RGBA);
+		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 		glutInitWindowPosition(100,100);
 		glutInitWindowSize(width,height);
 		glutCreateWindow("2D Lattice Boltzmann");
@@ -339,10 +339,9 @@ public: // opengl callback functions
 		float fps(0);
 		for (unsigned int i=0; i<fps_hist.size(); ++i) fps+=fps_hist[i];
 		fps/=fps_hist.size();
-		
-		//static float dummy_pos = 0.0f;
+
 		static int num_time_steps = 0;
-		static const unsigned int num_steps = 15;//25;
+		static const unsigned int num_steps = 1;
 		
 		if (running)
 		{
