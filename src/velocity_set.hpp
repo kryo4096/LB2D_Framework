@@ -53,6 +53,8 @@ public:
 	
 	const unsigned int size = 9;                ///< Number of velocities
 
+    const int opposites[9] = {0, 3, 4, 1, 2, 7, 8, 5, 6};
+
 	/** 
 	 *  @brief Compute equilibrium.
 	 * 

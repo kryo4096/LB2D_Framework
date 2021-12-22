@@ -11,22 +11,45 @@
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="VCPKG Libraries" ENABLED="false" CONFIG_NAME="RelWithDebInfo" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake" />
-      <configuration PROFILE_NAME="WSL" ENABLED="true" CONFIG_NAME="RelWithDebInfo" TOOLCHAIN_NAME="WSL" />
-      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake" />
-      <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake" />
-      <configuration PROFILE_NAME="Release (No VCPKG)" ENABLED="true" CONFIG_NAME="RelWithDebInfo" />
+      <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/report/data/re_30000_lbgk.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/runner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Doxyfile" beforeDir="false" afterPath="$PROJECT_DIR$/Doxyfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2D_0000.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/LB2D_0000.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/KBC_1e4_t10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/KBC_1e5_t30.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e12_kbc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e5_kbc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_10_re_1e2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_10_re_1e4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/t_30_re_1e5_kbc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plot_convergence.jl" beforeDir="false" afterPath="$PROJECT_DIR$/report/plot_convergence.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/KBC_1e4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/KBC_1e5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/sim1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/t_100_plot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/t_100_plot_kbc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/t_10_plot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/t_30_plot_kbc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/tg_plot.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mathutils.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg/ports/ffnvcodec/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/ffnvcodec/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg/ports/libmesh/copyright" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/libmesh/copyright" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg/ports/pangomm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/pangomm/COPYING" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,16 +72,14 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/velocity_set.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/include/random" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/vcpkg/installed/x64-windows/include/gl/freeglut_std.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/report/plot_convergence.jl" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/global.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/velocity_set.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/simulation.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="aj8omqjh" />
@@ -93,6 +114,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="structure.view.defaults.are.configured" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -103,36 +125,36 @@
       <recent name="C:\Users\jonas\Documents\Code\LBM\LB2D_Framework" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.Visual Simulation">
+  <component name="RunManager" selected="CMake Application.Cylinder Flow">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Convergence Test" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="convergence" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+    <configuration name="Convergence Test KBC" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="convergence_kbc" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="debug" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+    <configuration name="Convergence Test LBGK" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="convergence_lbgk" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EasyBMP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="EasyBMP" CONFIG_NAME="Debug">
+    <configuration name="Cylinder Flow" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="cylinder_flow" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Visual Simulation" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+    <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="debug" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.EasyBMP" />
-      <item itemvalue="CMake Application.Convergence Test" />
-      <item itemvalue="CMake Application.Visual Simulation" />
+      <item itemvalue="CMake Application.Convergence Test KBC" />
+      <item itemvalue="CMake Application.Convergence Test LBGK" />
+      <item itemvalue="CMake Application.Cylinder Flow" />
       <item itemvalue="CMake Application.Debug" />
     </list>
   </component>

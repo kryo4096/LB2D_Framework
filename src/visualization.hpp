@@ -22,6 +22,8 @@
 
 const int TEXTURE_DIM = 64;
 
+using namespace std::chrono_literals;
+
 namespace lb {
 
 template <typename T>
@@ -116,8 +118,8 @@ private: // ctors
 	  wall_drawing_mode(false)
 	{
 		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-		glutInitWindowPosition(100,100);
+		glutInitDisplayMode(GLUT_RGBA);
+		glutInitWindowPosition(2600,100);
 		glutInitWindowSize(width,height);
 		glutCreateWindow("2D Lattice Boltzmann");
 
@@ -249,8 +251,8 @@ private: // ctors
 		else glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP); 
 		if (periodic_y) glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); 
 		else glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP); 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 		//glShadeModel(GL_FLAT);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -347,8 +349,8 @@ public: // opengl callback functions
 		if (running)
 		{
 			for (unsigned int i=0; i<num_steps; ++i) sim->step();
-            using namespace std::chrono_literals;
-            //std::this_thread::sleep_for(10ms);
+
+            //std::this_thread::sleep_for(100ms);
 			
 			if (float_cast)
 			{

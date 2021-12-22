@@ -54,13 +54,14 @@ class simulation {
 	    std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
 	    const scalar_t Re;       ///< Reynolds number
 	    const scalar_t Vmax;     ///< mean flow velocity
-	    const scalar_t visc;     ///< viscosity
-	    const scalar_t beta;     ///< LB parameter beta
+	    scalar_t visc;     ///< viscosity
+	    scalar_t beta;     ///< LB parameter beta
 	    unsigned int time;         ///< simulation time
 	    bool file_output;          ///< flag whether to write files
 	    unsigned int output_freq;  ///< file output frequency
 	    unsigned int output_index; ///< index for file naming
 	    CollisionType collisionType;
+        bool periodic = true;
 
     public: // ctor
 
@@ -90,42 +91,6 @@ class simulation {
                 shift[i] = l.index(velocity_set().c[0][i], velocity_set().c[1][i]) - l.index(0, 0);
             }
         }
-        /**
-         *  @brief Initialize the flow field
-         *
-         *  Initialization includes defining initial density, velocity and
-         *  populations. You can use Taylor-Green vortex flow conditions.
-         */
-        void taylor_green() {
-
-            scalar_t mach = Vmax / velocity_set().cs;
-
-            scalar_t Kx = 2 * M_PI / l.nx;
-            scalar_t Ky = 2 * M_PI / l.ny;
-
-            scalar_t Ksqr = Kx * Kx + Ky * Ky;
-
-            for(int i = 0; i < l.nx; i++) {
-                for(int j = 0; j < l.ny; j++) {
-                    scalar_t u = - Vmax * cos(Kx * i) * sin(Ky * j);
-                    scalar_t v = Vmax * cos(Ky * j) * sin(Kx * i);
-                    scalar_t rho = 1 - mach * mach / (2 * Ksqr) * (Ky * Ky * cos(2 * Kx * i) + Kx * Kx * cos(2 * Ky * j));
-
-                    scalar_t f_eq[9];
-                    velocity_set().f_eq(f_eq, rho, u, v);
-
-                    auto& node = l.get_node(i, j);
-
-                    for(int p = 0; p < 9; p++) {
-                        node.f(p) = f_eq[p];
-                    }
-
-                    node.u() = u;
-                    node.v() = v;
-                    node.rho() = rho;
-                }
-            }
-        }
 
         void debug_advection() {
             for(int i = 0; i < l.nx; i++) {
@@ -141,35 +106,36 @@ class simulation {
             }
         }
 
-        void doubly_periodic_shear_layer() {
-            scalar_t kappa = 80.0;
-            scalar_t delta = 0.05;
+        inline bool should_collide(int i, int j) {
+            return periodic || i < l.nx - 1;
+        }
+
+        template<typename Func>
+        void initialize(Func initializer) {
 
             for(int i = 0; i < l.nx; i++) {
                 for(int j = 0; j < l.ny; j++) {
 
-                    scalar_t u;
-                    if (j <= l.ny / 2) {
-                        u = Vmax * tanh(kappa * (j / (scalar_t) l.ny - 0.25));
-                    } else {
-                        u = Vmax * tanh(kappa * (0.75 - j / (scalar_t) l.ny));
-                    }
+                auto [u, v, rho, wall] = initializer(*this, i,j);
 
-                    scalar_t v = Vmax * delta * sin(2 * M_PI * ((scalar_t) i / l.nx + 0.25));
-                    scalar_t rho = 1.0;
+                scalar_t f_eq[9];
+                auto node = l.get_node(i, j);
 
-                    scalar_t f_eq[9];
-                    velocity_set().f_eq(f_eq, rho, u, v);
+                if(wall) {
+                    l.add_wall(node.coord, node.coord);
+                }
 
-                    auto& node = l.get_node(i, j);
+                v9::f_eq(f_eq, rho, u, v);
 
-                    for(int p = 0; p < 9; p++) {
-                        node.f(p) = f_eq[p];
-                    }
+                for(int p = 0; p < 9; p++) {
 
-                    node.u() = u;
-                    node.v() = v;
-                    node.rho() = rho;
+                    node.f(p) = f_eq[p];
+                }
+
+                node.u() = u;
+                node.v() = v;
+                node.rho() = rho;
+
                 }
             }
         }
@@ -219,16 +185,16 @@ class simulation {
 
             //velocity 5: (1,1)
             #pragma omp for
-            for (int d = 0; d < l.ny; d++) {
-                for (int i = d, j = l.nx - 1; i >= 0 && j >= 0; i--, j--) {
-                    l.f[5][l.index(i, j) + shift[5]] = l.f[5][l.index(i, j)];
+            for (int d = 0; d < l.nx; d++) {
+                for (int i = d, j = l.ny - 1; i >= 0 && j >= 0; i--, j--) {
+                    l.f[5][l.index(i+1, j+1)] = l.f[5][l.index(i, j)];
                 }
             }
 
 			#pragma omp for
-            for (int d = 0; d < l.nx - 1; d++) {
-                for (int i = l.ny-1, j = d; i >= 0 && j >= 0; i--, j--) {
-                    l.f[5][l.index(i, j) + shift[5]] = l.f[5][l.index(i, j)];
+            for (int d = 0; d < l.ny - 1; d++) {
+                for (int i = l.nx-1, j = d; i >= 0 && j >= 0; i--, j--) {
+                    l.f[5][l.index(i+1, j+1)] = l.f[5][l.index(i, j)];
                 }
             }
 
@@ -276,43 +242,77 @@ class simulation {
 			        l.f[8][l.index(i, j) + shift[8]] = l.f[8][l.index(i, j)];
 		        }
 	        }
+            if (periodic) {
+                auto apply_buffers = [&](int i, int j) {
+                    int buf_index = l.index(i, j);
 
-			auto apply_buffers = [&](int i, int j) {
-				int buf_index = l.index(i, j);
+                    int new_i = (i + l.nx) % l.nx;
+                    int new_j = (j + l.ny) % l.ny;
 
-				int new_i = (i + l.nx) % l.nx;
-				int new_j = (j + l.ny) % l.ny;
+                    int new_index = l.index(new_i, new_j);
 
-				int new_index = l.index(new_i, new_j);
+                    for (int p = 1; p < velocity_set().size; p++) {
+                        int source_i = i - velocity_set().c[0][p];
+                        int source_j = j - velocity_set().c[1][p];
 
-				for(int p = 1; p < velocity_set().size; p++) {
-					int source_i = i - velocity_set().c[0][p];
-					int source_j = j - velocity_set().c[1][p];
+                        if (source_i >= 0 && source_j >= 0 && source_i < l.nx && source_j < l.ny) {
+                            l.f[p][new_index] = l.f[p][buf_index];
+                        }
+                    }
+                };
 
-					if(source_i >= 0 && source_j >= 0 && source_i < l.nx && source_j < l.ny) {
-						l.f[p][new_index] = l.f[p][buf_index];
-					}
-				}
-			};
-
-			#pragma omp for
-			for(int i = 0; i < l.nx + 1; i++) apply_buffers(i, -1);
-			#pragma omp for
-	        for(int i = 0; i < l.nx + 1; i++) apply_buffers(i, l.ny);
-			#pragma omp for
-	        for(int j = 0; j < l.ny + 2; j++) apply_buffers(-1, j-1);
-			#pragma omp for
-	        for(int j = 0; j < l.ny; j++) apply_buffers(l.nx, j);
+                #pragma omp for
+                for (int i = 0; i < l.nx + 1; i++) apply_buffers(i, -1);
+                #pragma omp for
+                for (int i = 0; i < l.nx + 1; i++) apply_buffers(i, l.ny);
+                #pragma omp for
+                for (int j = 0; j < l.ny + 2; j++) apply_buffers(-1, j - 1);
+                #pragma omp for
+                for (int j = 0; j < l.ny; j++) apply_buffers(l.nx, j);
+            }
         }
 
 
         /**  @brief apply wall boundary conditions */
-        void wall_bc() {
-            #pragma omp parallel for
-            for (int i = 0; i < l.wall_nodes.size(); ++i) {
-                // **************************
-                // * fill in your code here *
-                // **************************
+        void boundary_conditions() {
+
+            for (auto& node : l.wall_nodes) {
+                for(int k = 0; k < 9; k++) {
+                    auto opp = velocity_set().opposites[k];
+                    if(!l.get_node(node.index + shift[opp]).has_flag_property("wall")) {
+                        l.f[opp][node.index + shift[opp]] = node.f(k);
+                    }
+                }
+            }
+
+            if(!periodic) {
+                for (int j = 0; j < (int) l.ny; j++) {
+                    scalar_t u = Vmax;
+
+                    scalar_t v = 0;
+                    scalar_t rho = 1.0;
+
+                    scalar_t f_eq[9];
+                    velocity_set().f_eq(f_eq, rho, u, v);
+
+                    auto node = l.get_node(0, j);
+                    node.u() = u;
+                    node.v() = v;
+                    node.rho() = rho;
+
+                    for (int p = 0; p < 9; p++) {
+                        node.f(p) = f_eq[p];
+                    }
+                }
+
+                for (int i = 0; i <= (int) l.nx; i++) {
+                    l.get_node(i, 0).f(2) = l.get_node(i, -1).f(4);
+                    l.get_node(i - 1, 0).f(5) = l.get_node(i, -1).f(8);
+                    l.get_node(i + 1, 0).f(6) = l.get_node(i, -1).f(7);
+                    l.get_node(i, l.ny - 1).f(4) = l.get_node(i, l.ny).f(2);
+                    l.get_node(i - 1, l.ny - 1).f(8) = l.get_node(i, l.ny).f(5);
+                    l.get_node(i + 1, l.ny - 1).f(7) = l.get_node(i, l.ny).f(6);
+                }
             }
         }
 
@@ -321,6 +321,9 @@ class simulation {
 	        #pragma omp for
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
+
+                    if(!should_collide(i,j)) continue;
+
                     int idx = l.index(i, j);
 
                     scalar_t f[9];
@@ -366,6 +369,9 @@ class simulation {
             #pragma omp for
 	        for (int j = 0; j < static_cast<int>(l.ny); ++j) {
 		        for (int i = 0; i < static_cast<int>(l.nx); ++i) {
+
+                    if(!should_collide(i,j)) continue;
+
 			        int idx = l.index(i, j);
 
 			        for (int k = 0; k < 9; k++) {
@@ -398,8 +404,6 @@ class simulation {
 			        scalar_t Pi_eq = f_eq[5] - f_eq[6] + f_eq[7] - f_eq[8];
 			        scalar_t N_eq = f_eq[1] - f_eq[2] + f_eq[3] - f_eq[4];
 
-
-
 			        delta_s[0] = 0;
 			        delta_s[1] = 0.25f * (N - N_eq);
 			        delta_s[2] = - 0.25f * (N - N_eq);
@@ -419,6 +423,8 @@ class simulation {
                         ds_dh += delta_h[k] * delta_s[k] / f_eq[k];
                         dh_dh += delta_h[k] * delta_h[k] / f_eq[k];
 					}
+
+                    if (dh_dh==0) dh_dh = 1e-20;
 
 					scalar_t gamma = 1 - (2 * beta - 1) * ds_dh / dh_dh;
 
@@ -455,38 +461,34 @@ class simulation {
 
         /** @brief LB step */
         void step() {
-	        switch (collisionType) {
-		        case CollisionType::LBGK: {
-					#pragma omp parallel
-					{
-				        advect();
-				        collide_lbgk();
-		            }
-			        break;
-		        }
-		        case CollisionType::KBC: {
-					#pragma omp parallel
-			        {
-				        advect();
-				        collide_kbc();
-			        }
-			        break;
-		        }
-                case CollisionType::NONE: {
-                    #pragma omp parallel
-                    {
-                        calculate_moments();
-                        advect();
-                    }
-                }
-	        }
 
-			/*
+
+
+                #pragma omp parallel
+                advect();
+                boundary_conditions();
+
+                switch (collisionType) {
+                case CollisionType::LBGK:
+                    #pragma omp parallel
+                    collide_lbgk();
+                    break;
+                case CollisionType::KBC:
+                    #pragma omp parallel
+                    collide_kbc();
+                    break;
+                case CollisionType::NONE:
+                    #pragma omp parallel
+                    calculate_moments();
+                    break;
+                }
+
+
             // file io
             if (file_output && (((time + 1) % output_freq) == 0 || time == 0)) {
                 write_fields();
                 ++output_index;
-            }*/
+            }
 
             ++time;
         }
