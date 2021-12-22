@@ -20,22 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compilerexplorer.settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/data/KBC_1e4_t10.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mathutils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plot_convergence.jl" beforeDir="false" afterPath="$PROJECT_DIR$/report/plot_convergence.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/sim1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_100_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_100_re_1e2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_100_re_1e4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_10_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_10_re_1e2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/t_10_re_1e4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/tg_plot.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mathutils.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +36,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release (No VCPKG)" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:RelWithDebInfo" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -59,14 +49,16 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/velocity_set.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/include/random" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/vcpkg/installed/x64-windows/include/gl/freeglut_std.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/report/plot_convergence.jl" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/global.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/velocity_set.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/simulation.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="aj8omqjh" />
@@ -111,31 +103,37 @@
       <recent name="C:\Users\jonas\Documents\Code\LBM\LB2D_Framework" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.LB2D">
+  <component name="RunManager" selected="CMake Application.Visual Simulation">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Convergence Test" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="convergence" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="debug" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EasyBMP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="EasyBMP" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LB2D (no vis)" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="taylor_green_convergence" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LB2D" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Visual Simulation" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LB2D" TARGET_NAME="LB2D" CONFIG_NAME="WSL" RUN_TARGET_PROJECT_NAME="LB2D" RUN_TARGET_NAME="LB2D">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="CMake Application.EasyBMP" />
-      <item itemvalue="CMake Application.LB2D (no vis)" />
-      <item itemvalue="CMake Application.LB2D" />
+      <item itemvalue="CMake Application.Convergence Test" />
+      <item itemvalue="CMake Application.Visual Simulation" />
+      <item itemvalue="CMake Application.Debug" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

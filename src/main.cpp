@@ -7,11 +7,25 @@
 
 namespace lb {
     void visual_sim(int argc, char *argv[]) {
-        auto sim = simulation(512, 256, 1e5, 0.05, lb::CollisionType::KBC);
-        sim.doubly_periodic_shear_layer();
+        auto sim = simulation(128, 128, 1e5, 0.04, lb::CollisionType::LBGK);
+        sim.taylor_green();
         std::cout << sim << std::endl;
 
         printf("beta = %.20f\n", sim.beta);
+
+        try {
+            lb::visualization::initialize(&sim, argc, argv);
+            lb::visualization::get_instance().run();
+        }
+        catch (std::runtime_error& e) {
+            std::cerr << e.what() << std::endl;
+        }
+    }
+
+
+    void debug(int nx, int ny, scalar_t Vmax, int argc, char *argv[]) {
+        auto sim = simulation(nx, ny, 0, Vmax, CollisionType::NONE);
+        sim.debug_advection();
 
         try {
             lb::visualization::initialize(&sim, argc, argv);
@@ -48,21 +62,21 @@ namespace lb {
 
             int L = start_size * powf(2, n * log_step_size);
 
-            auto *sim = new simulation(L, L, Re, Vmax, collision_type);
-            sim->taylor_green();
+            auto sim = simulation(L, L, Re, Vmax, collision_type);
+            sim.taylor_green();
 
-            int nx = sim->l.nx;
-            int ny = sim->l.ny;
+            int nx = sim.l.nx;
+            int ny = sim.l.ny;
 
             scalar_t Kx = 2 * M_PI / nx;
             scalar_t Ky = 2 * M_PI / ny;
             scalar_t Ksqr = Kx * Kx + Ky * Ky;
-            scalar_t nu = sim->visc;
+            scalar_t nu = sim.visc;
             scalar_t l2error = 0;
             scalar_t dA = 1.0 / L / L;
 
             for(int t = 0; t < iterations; t++) {
-                sim->step();
+                sim.step();
             }
 
             scalar_t linferror = 0;
@@ -72,10 +86,10 @@ namespace lb {
                     scalar_t u = - Vmax * cos(Kx * i) * sin(Ky * j) * exp(-nu * Ksqr * iterations);
                     scalar_t v = Vmax * cos(Ky * j) * sin(Kx * i) * exp(-nu * Ksqr * iterations);
 
-                    auto& node = sim->l.get_node(i, j);
+                    auto& node = sim.l.get_node(i, j);
 
-                    scalar_t error_u = abs(u - node.u()) / L; // velocity measured relative to domain size
-                    scalar_t error_v = abs(v - node.v()) / L;
+                    scalar_t error_u = abs(u - node.u()); // velocity measured relative to domain size
+                    scalar_t error_v = abs(v - node.v());
 
                     scalar_t error = (error_u * error_u + error_v * error_v);
                     l2error += error * dA;
@@ -96,7 +110,7 @@ namespace lb {
                     << std::setw(20) << linferror
                     << std::setw(20) << -log(linferrors[n] / linferrors[n - 1]) / log(Ls[n] / (scalar_t) Ls[n - 1]);
 
-                printf(",\t %.20f\n", sim->beta);
+                printf(",\t %.20f\n", sim.beta);
             }
         }
     }
@@ -115,7 +129,8 @@ int main(int argc, char *argv[])
     }
 
     if (mode == "visual") lb::visual_sim(argc, argv);
-    if (mode == "taylor_green_convergence") lb::convergence_test(11, 128, 0.5, 100, 0.1, 1e20, lb::CollisionType::LBGK);
+    if (mode == "convergence") lb::convergence_test(11, 128, 0.5, 100, 0.1, 1e5, lb::CollisionType::LBGK);
+    if (mode == "debug") lb::debug(200, 100, 0.1, argc, argv);
     else {
         std::cerr << "ERROR: " << mode << " is not a valid mode." << std::endl;
         return -1;

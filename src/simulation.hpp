@@ -13,13 +13,13 @@
 #include "H_root.hpp"
 #include "lattice.hpp"
 #include "timer.hpp"
-#include "mathutils.h"
 
 #include <sstream>
 #include <random>
 
 #include <omp.h>
 #include <cassert>
+#include <complex>
 
 namespace lb {
 
@@ -34,12 +34,14 @@ namespace lb {
 
 enum CollisionType {
     LBGK,
-    KBC
+    KBC,
+    NONE,
 };
 
 const std::string CollisionTypeNames[]  {
     "LBGK",
-    "KBC"
+    "KBC",
+    "None"
 };
 
 std::ostream& operator<<(std::ostream& os, CollisionType type) {
@@ -88,7 +90,6 @@ class simulation {
                 shift[i] = l.index(velocity_set().c[0][i], velocity_set().c[1][i]) - l.index(0, 0);
             }
         }
-
         /**
          *  @brief Initialize the flow field
          *
@@ -105,10 +106,10 @@ class simulation {
             scalar_t Ksqr = Kx * Kx + Ky * Ky;
 
             for(int i = 0; i < l.nx; i++) {
-                for(int j = 0; j < l.nx; j++) {
+                for(int j = 0; j < l.ny; j++) {
                     scalar_t u = - Vmax * cos(Kx * i) * sin(Ky * j);
                     scalar_t v = Vmax * cos(Ky * j) * sin(Kx * i);
-                    scalar_t rho = 1 - mach * mach / (2 * Ksqr) * (Ky * Ky * cos(2 * Kx * i) + Kx * Kx * sin(2 * Ky * j));
+                    scalar_t rho = 1 - mach * mach / (2 * Ksqr) * (Ky * Ky * cos(2 * Kx * i) + Kx * Kx * cos(2 * Ky * j));
 
                     scalar_t f_eq[9];
                     velocity_set().f_eq(f_eq, rho, u, v);
@@ -122,6 +123,20 @@ class simulation {
                     node.u() = u;
                     node.v() = v;
                     node.rho() = rho;
+                }
+            }
+        }
+
+        void debug_advection() {
+            for(int i = 0; i < l.nx; i++) {
+                for(int j = 0; j < l.ny; j++) {
+
+                    auto& node = l.get_node(i, j);
+
+                    if(std::abs<int>(i - l.nx / 2) < 10 && std::abs<int>(j - l.ny / 2) < 10 )
+                    for(int k = 0; k < 9; k++) {
+                        node.f(k) = 1.0;
+                    }
                 }
             }
         }
@@ -280,8 +295,6 @@ class simulation {
 				}
 			};
 
-            #pragma omp barrier
-
 			#pragma omp for
 			for(int i = 0; i < l.nx + 1; i++) apply_buffers(i, -1);
 			#pragma omp for
@@ -305,7 +318,7 @@ class simulation {
 
         /** @brief collide the populations */
         void collide_lbgk() {
-	        #pragma omp for schedule(static)
+	        #pragma omp for
             for (int j = 0; j < static_cast<int>(l.ny); ++j) {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
                     int idx = l.index(i, j);
@@ -350,7 +363,7 @@ class simulation {
             scalar_t delta_s[9];
             scalar_t delta_h[9];
 
-            #pragma omp for schedule(static)
+            #pragma omp for
 	        for (int j = 0; j < static_cast<int>(l.ny); ++j) {
 		        for (int i = 0; i < static_cast<int>(l.nx); ++i) {
 			        int idx = l.index(i, j);
@@ -369,8 +382,6 @@ class simulation {
 			        scalar_t A = rho * (2 - x_root) * (2 - y_root);
 			        scalar_t BX = (2 * u + x_root) / (1 - u);
 			        scalar_t BY = (2 * v + y_root) / (1 - v);
-					
-
 
 			        f_eq[0] = 16.0/36.0 * A;
 			        f_eq[1] = 4.0/36.0 * A * BX;
@@ -409,10 +420,10 @@ class simulation {
                         dh_dh += delta_h[k] * delta_h[k] / f_eq[k];
 					}
 
-					scalar_t gamma = 1 / beta - (2 - 1 / beta) * ds_dh / dh_dh;
+					scalar_t gamma = 1 - (2 * beta - 1) * ds_dh / dh_dh;
 
 			        for(int k = 0; k < 9; k++) {
-				        l.f[k][idx] -= beta * (2 * delta_s[k] + gamma * delta_h[k]);
+				        l.f[k][idx] -= beta * 2 * delta_s[k] + gamma * delta_h[k];
 			        }
 
 			        l.u[idx] = u;
@@ -420,6 +431,26 @@ class simulation {
 			        l.rho[idx] = gamma;
 		        }
 	        }
+        }
+
+        void calculate_moments() {
+            #pragma omp for
+            for(int i = 0; i < l.nx; i++) {
+                for(int j = 0; j < l.ny; j++) {
+                    int idx = l.index(i, j);
+
+                    scalar_t f[9];
+
+                    for (int k = 0; k < 9; k++) {
+                        f[k] = l.f[k][idx];
+                    }
+
+                    scalar_t rho = f[0] + f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8];
+                    l.rho[idx] = rho;
+                    l.u[idx] = (f[1] - f[3] + f[5] - f[6] - f[7] + f[8]) / rho;
+                    l.v[idx] = (f[2] - f[4] + f[5] + f[6] - f[7] - f[8]) / rho;
+                }
+            }
         }
 
         /** @brief LB step */
@@ -441,6 +472,13 @@ class simulation {
 			        }
 			        break;
 		        }
+                case CollisionType::NONE: {
+                    #pragma omp parallel
+                    {
+                        calculate_moments();
+                        advect();
+                    }
+                }
 	        }
 
 			/*

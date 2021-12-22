@@ -18,6 +18,7 @@
 #include <cstdlib> // rand
 #include <sstream>
 #include "../third_party/EasyBMP/EasyBMP.h"
+#include <thread>
 
 const int TEXTURE_DIM = 64;
 
@@ -341,12 +342,13 @@ public: // opengl callback functions
 		fps/=fps_hist.size();
 
 		static int num_time_steps = 0;
-		static const unsigned int num_steps = 1;
+		static const unsigned int num_steps = 15;
 		
 		if (running)
 		{
 			for (unsigned int i=0; i<num_steps; ++i) sim->step();
-			
+            using namespace std::chrono_literals;
+            //std::this_thread::sleep_for(10ms);
 			
 			if (float_cast)
 			{

@@ -63,15 +63,15 @@ public:
 	 *  @param[in]     u    Local flow velocity in x-direction
 	 *  @param[in]     v    Local flow velocity in y-direction
 	 */
-	inline void f_eq(scalar_t* f_eq, scalar_t rho, scalar_t u, scalar_t v) const
+	static inline void f_eq(scalar_t* f_eq, scalar_t rho, scalar_t u, scalar_t v)
 	{
 
-		float x_root = sqrtf(1 + 3 * u * u);
-		float y_root = sqrtf(1 + 3 * v * v);
+		scalar_t x_root = sqrtf(1 + 3 * u * u);
+        scalar_t y_root = sqrtf(1 + 3 * v * v);
 
-		float A = rho * (2 - x_root) * (2 - y_root);
-		float BX = (2 * u + x_root) / (1 - u);
-		float BY = (2 * v + y_root) / (1 - v);
+        scalar_t A = rho * (2 - x_root) * (2 - y_root);
+        scalar_t BX = (2 * u + x_root) / (1 - u);
+        scalar_t BY = (2 * v + y_root) / (1 - v);
 
 		f_eq[0] = 16.0/36.0 * A;
 		f_eq[1] = 4.0/36.0 * (A * BX);
