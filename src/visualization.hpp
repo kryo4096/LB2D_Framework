@@ -344,7 +344,7 @@ public: // opengl callback functions
 		fps/=fps_hist.size();
 
 		static int num_time_steps = 0;
-		static const unsigned int num_steps = 15;
+		static const unsigned int num_steps = 1;
 		
 		if (running)
 		{

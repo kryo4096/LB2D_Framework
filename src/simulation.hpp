@@ -290,7 +290,7 @@ namespace lb {
                 for (int j = 0; j < (int) l.ny; j++) {
                     scalar_t u = Vmax;
 
-                    scalar_t v = 0;
+                    scalar_t v = Vmax * std::sin(time / 100.0 * 2 * M_PI)*0.01;
                     scalar_t rho = 1.0;
 
                     scalar_t f_eq[9];
@@ -325,6 +325,12 @@ namespace lb {
 
                     if (!should_collide(i, j)) continue;
 
+                    scalar_t beta_ = beta;
+
+                    if (i > l.nx - 30) {
+                        beta_ = 0.5;
+                    }
+
                     int idx = l.index(i, j);
 
                     scalar_t f[9];
@@ -343,15 +349,15 @@ namespace lb {
                     scalar_t BX = (2 * u + x_root) / (1 - u);
                     scalar_t BY = (2 * v + y_root) / (1 - v);
 
-                    l.f[0][idx] = f[0] + 2 * beta * (16.0 / 36.0 * A - f[0]);
-                    l.f[1][idx] = f[1] + 2 * beta * (4.0 / 36.0 * A * BX - f[1]);
-                    l.f[2][idx] = f[2] + 2 * beta * (4.0 / 36.0 * A * BY - f[2]);
-                    l.f[3][idx] = f[3] + 2 * beta * (4.0 / 36.0 * A / BX - f[3]);
-                    l.f[4][idx] = f[4] + 2 * beta * (4.0 / 36.0 * A / BY - f[4]);
-                    l.f[5][idx] = f[5] + 2 * beta * (1.0 / 36.0 * A * BX * BY - f[5]);
-                    l.f[6][idx] = f[6] + 2 * beta * (1.0 / 36.0 * A / BX * BY - f[6]);
-                    l.f[7][idx] = f[7] + 2 * beta * (1.0 / 36.0 * A / BX / BY - f[7]);
-                    l.f[8][idx] = f[8] + 2 * beta * (1.0 / 36.0 * A * BX / BY - f[8]);
+                    l.f[0][idx] = f[0] + 2 * beta_ * (16.0 / 36.0 * A - f[0]);
+                    l.f[1][idx] = f[1] + 2 * beta_ * (4.0 / 36.0 * A * BX - f[1]);
+                    l.f[2][idx] = f[2] + 2 * beta_ * (4.0 / 36.0 * A * BY - f[2]);
+                    l.f[3][idx] = f[3] + 2 * beta_ * (4.0 / 36.0 * A / BX - f[3]);
+                    l.f[4][idx] = f[4] + 2 * beta_ * (4.0 / 36.0 * A / BY - f[4]);
+                    l.f[5][idx] = f[5] + 2 * beta_ * (1.0 / 36.0 * A * BX * BY - f[5]);
+                    l.f[6][idx] = f[6] + 2 * beta_ * (1.0 / 36.0 * A / BX * BY - f[6]);
+                    l.f[7][idx] = f[7] + 2 * beta_ * (1.0 / 36.0 * A / BX / BY - f[7]);
+                    l.f[8][idx] = f[8] + 2 * beta_ * (1.0 / 36.0 * A * BX / BY - f[8]);
 
                     l.u[idx] = u;
                     l.v[idx] = v;
@@ -372,6 +378,12 @@ namespace lb {
                 for (int i = 0; i < static_cast<int>(l.nx); ++i) {
 
                     if (!should_collide(i, j)) continue;
+
+                    scalar_t beta_ = beta;
+
+                    if (i > l.nx - 30) {
+                        beta_ = 0.5;
+                    }
 
                     int idx = l.index(i, j);
 
@@ -427,10 +439,10 @@ namespace lb {
 
                     if (dh_dh == 0) dh_dh = 1e-20;
 
-                    scalar_t gamma = 1 - (2 * beta - 1) * ds_dh / dh_dh;
+                    scalar_t gamma = 1 - (2 * beta_ - 1) * ds_dh / dh_dh;
 
                     for (int k = 0; k < 9; k++) {
-                        l.f[k][idx] -= beta * 2 * delta_s[k] + gamma * delta_h[k];
+                        l.f[k][idx] -= beta_ * 2 * delta_s[k] + gamma * delta_h[k];
                     }
 
                     l.u[idx] = u;

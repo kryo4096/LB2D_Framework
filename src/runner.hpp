@@ -13,7 +13,7 @@
 
 namespace lb::runner {
     void cylinder_flow() {
-        auto sim = simulation(600, 50, 1e5, 0.1, lb::CollisionType::KBC);
+        auto sim = simulation(600,  300, 1e5, 0.1, lb::CollisionType::KBC);
 
         sim.initialize([&](const simulation &sim, int i, int j) -> std::tuple<scalar_t, scalar_t, scalar_t, bool> {
 
@@ -21,9 +21,10 @@ namespace lb::runner {
 
             bool wall = std::pow(i - 10 * D, 2) + std::pow(j - (int) sim.l.ny / 2, 2) < std::pow(0.5 * D, 2);
 
-            scalar_t u = std::max(sim.Vmax * (9.5 * D - i) / (9.5 * D), 0.0);
+            scalar_t u = std::max(sim.Vmax * (1 - i / 9.5 / D), 0.0);
+            scalar_t v = sim.Vmax * (1 - i / (double) sim.l.nx) * sin(i * 2* M_PI / 100) * j * (sim.l.ny - j) / sim.l.ny / sim.l.ny * 0.1;
 
-            return std::tuple{u, 0.0, 1.0, wall};
+            return std::tuple{u, v, 1.0, wall};
         });
 
         sim.periodic = false;
@@ -155,7 +156,7 @@ namespace lb::runner {
 
                     scalar_t error = (error_u * error_u + error_v * error_v);
                     l2error += error * dA;
-                    linferror = std::max(sqrt(error), linferror);
+                    linferror = std::max(std::sqrt(error), linferror);
                 }
             }
 

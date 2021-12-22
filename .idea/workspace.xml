@@ -17,7 +17,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" afterDir="false" />
