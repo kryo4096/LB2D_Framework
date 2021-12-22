@@ -16,34 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/report/data/re_30000_lbgk.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/runner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Doxyfile" beforeDir="false" afterPath="$PROJECT_DIR$/Doxyfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2D_0000.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/LB2D_0000.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/KBC_1e4_t10.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/KBC_1e5_t30.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e12_kbc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_100_re_1e5_kbc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_10_re_1e2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_10_re_1e4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/data/t_30_re_1e5_kbc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plot_convergence.jl" beforeDir="false" afterPath="$PROJECT_DIR$/report/plot_convergence.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/KBC_1e4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/KBC_1e5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/sim1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/t_100_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/t_100_plot_kbc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/t_10_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/t_30_plot_kbc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/plots/tg_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" afterDir="false" />
