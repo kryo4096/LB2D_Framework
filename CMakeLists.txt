@@ -18,7 +18,7 @@ if (MSVC)
             LB2D PROPERTIES
             VS_DEBUGGER_WORKING_DIRECTORY "./"
     )
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp /O2 /std:c++20 /arch:AVX2")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp /O2 /std:c++17 /arch:AVX2")
     target_link_libraries(LB2D PRIVATE GLUT::GLUT OpenGL::GLU OpenGL::GL GLEW::GLEW EasyBMP)
 endif (MSVC)
 

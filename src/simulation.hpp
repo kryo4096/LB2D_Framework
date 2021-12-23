@@ -53,8 +53,8 @@ namespace lb {
     public:
         lattice l;                 ///< lattice
         std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
-        const scalar_t Re;       ///< Reynolds number
-        const scalar_t Vmax;     ///< mean flow velocity
+        scalar_t Re;       ///< Reynolds number
+        scalar_t Vmax;     ///< mean flow velocity
         scalar_t visc;     ///< viscosity
         scalar_t beta;     ///< LB parameter beta
         unsigned int time;         ///< simulation time
@@ -63,6 +63,10 @@ namespace lb {
         unsigned int output_index; ///< index for file naming
         CollisionType collisionType;
         bool periodic = true;
+		bool regularized = false;
+		bool calculate_wall_force = false;
+	    scalar_t wall_force_sum_x = 0;
+	    scalar_t wall_force_sum_y = 0;
 
     public: // ctor
 
@@ -80,7 +84,7 @@ namespace lb {
                   shift(velocity_set().size),
                   Re(Re),
                   Vmax(Vmax),
-                  visc(Vmax * ny / Re),
+                  visc(Vmax * nx / Re),
                   beta(1 / (2 * visc / (velocity_set().cs * velocity_set().cs) + 1)),
                   time(0),
                   file_output(false), // set to true if you want to write files
@@ -92,6 +96,11 @@ namespace lb {
                 shift[i] = l.index(velocity_set().c[0][i], velocity_set().c[1][i]) - l.index(0, 0);
             }
         }
+
+		void calculate_beta() {
+			visc = Vmax * l.nx / Re;
+			beta = 1 / (2 * visc / (velocity_set().cs * velocity_set().cs) + 1);
+		}
 
         void debug_advection() {
             for (int i = 0; i < l.nx; i++) {
@@ -277,20 +286,39 @@ namespace lb {
         /**  @brief apply wall boundary conditions */
         void boundary_conditions() {
 
+			scalar_t force_x = 0;
+			scalar_t force_y = 0;
+
             for (auto &node: l.wall_nodes) {
                 for (int k = 0; k < 9; k++) {
                     auto opp = velocity_set().opposites[k];
                     if (!l.get_node(node.index + shift[opp]).has_flag_property("wall")) {
                         l.f[opp][node.index + shift[opp]] = node.f(k);
+
+						force_x += 2 * node.f(k) * v9::c[0][k];
+	                    force_y += 2 * node.f(k) * v9::c[1][k];
                     }
                 }
             }
+
+			if(time % 10000 > 2000) {
+				wall_force_sum_x += force_x;
+				wall_force_sum_y += force_y;
+			}
+
+			if (calculate_wall_force && time % 10000 == 0) {
+				std::cout << Vmax / v9::cs << ", " << wall_force_sum_x / 8000 << ", " << wall_force_sum_y / 8000 << "\n";
+				Vmax += 0.01;
+				calculate_beta();
+				wall_force_sum_x = 0;
+				wall_force_sum_y = 0;
+			}
 
             if (!periodic) {
                 for (int j = 0; j < (int) l.ny; j++) {
                     scalar_t u = Vmax;
 
-                    scalar_t v = Vmax * std::sin(time / 100.0 * 2 * M_PI)*0.01;
+                    scalar_t v = 0;
                     scalar_t rho = 1.0;
 
                     scalar_t f_eq[9];
@@ -327,7 +355,7 @@ namespace lb {
 
                     scalar_t beta_ = beta;
 
-                    if (i > l.nx - 30) {
+                    if (!periodic && i > l.nx - 30) {
                         beta_ = 0.5;
                     }
 
@@ -381,9 +409,9 @@ namespace lb {
 
                     scalar_t beta_ = beta;
 
-                    if (i > l.nx - 30) {
-                        beta_ = 0.5;
-                    }
+	                if (!periodic && i > l.nx - 30) {
+		                beta_ = 0.5;
+	                }
 
                     int idx = l.index(i, j);
 
@@ -440,6 +468,10 @@ namespace lb {
                     if (dh_dh == 0) dh_dh = 1e-20;
 
                     scalar_t gamma = 1 - (2 * beta_ - 1) * ds_dh / dh_dh;
+
+					if(regularized) {
+						gamma = 1;
+					}
 
                     for (int k = 0; k < 9; k++) {
                         l.f[k][idx] -= beta_ * 2 * delta_s[k] + gamma * delta_h[k];
@@ -519,11 +551,13 @@ namespace lb {
             os << "collision type: " << sim.collisionType << "\n";
             os << "domain: " << sim.l.nx << " x " << sim.l.ny << "\n";
             os << "Re:     " << sim.Re << "\n";
-            os << "Vmax:   " << sim.Vmax << "\n";
+            os << "Vmax:   " << sim.Vmax << " mach : "<< sim.Vmax / v9::cs <<"\n";
             os << "visc:   " << sim.visc << "\n";
             os << "beta:   " << sim.beta << "\n";
             return os;
         }
+
+
     };
 
 } // lb

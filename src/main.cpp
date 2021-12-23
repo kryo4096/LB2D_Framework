@@ -32,10 +32,11 @@ int main(int argc, char *argv[]) {
 
     if (mode == "cylinder_flow") lb::runner::cylinder_flow();
     else if (mode == "shear_layer") lb::runner::shear_layer();
+	else if (mode == "taylor_green") lb::runner::taylor_green();
     else if (mode == "convergence_lbgk")
-        lb::runner::convergence_test(17, 128, 0.25, 20, 0.05, 3e4, lb::CollisionType::LBGK);
+        lb::runner::convergence_test(17, 128, 0.25, 100, 0.05, 30000, lb::CollisionType::LBGK);
     else if (mode == "convergence_kbc")
-        lb::runner::convergence_test(17, 128, 0.25, 20, 0.05, 3e4, lb::CollisionType::KBC);
+        lb::runner::convergence_test(17, 128, 0.25, 100, 0.05, 30000, lb::CollisionType::KBC);
     else if (mode == "debug") lb::runner::debug();
     else if (mode == "help") show_help();
     else {
@@ -47,9 +48,11 @@ int main(int argc, char *argv[]) {
 }
 
 void show_help() {
-    std::cout << "Available Modes: \n"
+    std::cout << "Usage: ./LB2D <mode> (most parameters can be tweaked in runner.hpp)\n"
+				<< "Available Modes: \n"
               << "cylinder_flow : Simulates flow around a cylinder using the KBC-D collision model.\n"
               << "shear_layer : Simulates a periodic shear layer using the KBC-D collision model. \n"
+			  << "taylor_green : Simulates a taylor-green vortex using LBGK. \n"
               << "convergence_lbgk : taylor-green-vortex benchmark for lbgk. \n"
               << "convergence_kbc : taylor-green-vortex benchmark for kbc \n";
 }

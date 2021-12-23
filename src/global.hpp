@@ -16,7 +16,7 @@
 namespace lb {
 
 /** Floating point type (single or double precision) */
-using scalar_t = float;
+using scalar_t = double;
 
 /**
  *  @brief Coordinate in 2D

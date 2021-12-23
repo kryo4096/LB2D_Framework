@@ -16,17 +16,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6281a871-c0f2-45af-ab82-087922cfaebd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/report/data/force_vs_velocity.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/data/re_30000_lbgk_t_100.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2D_0000.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/data/re_30000_lbgk.csv" beforeDir="false" afterPath="$PROJECT_DIR$/report/data/re_30000_lbgk_t20.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plot_convergence.jl" beforeDir="false" afterPath="$PROJECT_DIR$/report/plots.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/plots/re_30000_lbgk.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/plots/re_30000_lbgk_t20.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/global.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/global.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/simulation.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/simulation.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualization.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/atkmm/COPYING" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/boost-modular-build-helper/Jamroot.jam.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg/ports/ffnvcodec/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/ffnvcodec/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg/ports/libmesh/copyright" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/libmesh/copyright" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vcpkg/ports/pangomm/COPYING" beforeDir="false" afterPath="$PROJECT_DIR$/vcpkg/ports/pangomm/COPYING" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/velocity_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/velocity_set.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vcpkg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,14 +53,14 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/report/plot_convergence.jl" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/report/plots.jl" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/global.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/velocity_set.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/simulation.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/visualization.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/simulation.hpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="aj8omqjh" />
@@ -84,7 +88,7 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/report/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -95,9 +99,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/report/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ex1" />
       <recent name="C:\Users\jonas\Documents\Code\LBM\LB2D_Framework\report" />
       <recent name="C:\Users\jonas\Documents\Code\LBM\LB2D_Framework" />
     </key>
@@ -164,6 +170,8 @@
       <workItem from="1640082198733" duration="34000" />
       <workItem from="1640082240730" duration="9111000" />
       <workItem from="1640104372576" duration="38000" />
+      <workItem from="1640259779426" duration="1405000" />
+      <workItem from="1640267863416" duration="16189000" />
     </task>
     <servers />
   </component>

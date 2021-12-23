@@ -13,7 +13,7 @@
 
 namespace lb::runner {
     void cylinder_flow() {
-        auto sim = simulation(600,  300, 1e5, 0.1, lb::CollisionType::KBC);
+        auto sim = simulation(300,  150, 1e5, 0.00, lb::CollisionType::KBC);
 
         sim.initialize([&](const simulation &sim, int i, int j) -> std::tuple<scalar_t, scalar_t, scalar_t, bool> {
 
@@ -28,6 +28,7 @@ namespace lb::runner {
         });
 
         sim.periodic = false;
+		sim.calculate_wall_force = true;
         std::cout << sim << std::endl;
 
         printf("beta = %.20f\n", sim.beta);
@@ -41,9 +42,46 @@ namespace lb::runner {
         }
     }
 
+	void taylor_green() {
+
+		int L = 128;
+
+		auto sim = simulation(L, L, 3000, 0.05, lb::CollisionType::LBGK);
+
+		scalar_t Kx = 2 * M_PI / L;
+		scalar_t Ky = 2 * M_PI / L;
+		scalar_t Ksqr = Kx * Kx + Ky * Ky;
+		scalar_t nu = sim.visc;
+		scalar_t l2error = 0;
+		scalar_t dA = 1.0 / L / L;
+		scalar_t mach = sim.Vmax / velocity_set().cs;
+
+		sim.initialize([&](const simulation &sim, int i, int j) -> std::tuple<scalar_t, scalar_t, scalar_t, bool> {
+			scalar_t u = -sim.Vmax * std::cos(Kx * i) * std::sin(Ky * j);
+			scalar_t v = sim.Vmax * std::cos(Ky * j) * std::sin(Kx * i);
+			scalar_t rho = 1 - mach * mach / (2 * Ksqr) *
+			                   (Ky * Ky * std::cos(2 * Kx * i) + Kx * Kx * std::cos(2 * Ky * j));
+
+			return std::tuple{u, v, rho, false};
+		});
+
+		std::cout << sim << std::endl;
+
+		printf("beta = %.20f\n", sim.beta);
+
+		try {
+			lb::visualization::initialize(&sim, 0, nullptr);
+			lb::visualization::get_instance().run();
+		}
+		catch (std::runtime_error &e) {
+			std::cerr << e.what() << std::endl;
+		}
+	}
+
 
     void shear_layer() {
-        auto sim = simulation(512, 512, 3000, 0.05, lb::CollisionType::KBC);
+        auto sim = simulation(128, 128, 30000, 0.05, lb::CollisionType::KBC);
+		sim.regularized = false; // enable for regularized elbm instead of kbc (gamma = 1/beta)
 
         scalar_t kappa = 80.0;
         scalar_t delta = 0.05;
@@ -88,8 +126,8 @@ namespace lb::runner {
         }
     }
 
-    void convergence_test(int count = 11, int start_size = 128, scalar_t log_step_size = 0.5, int iterations = 50,
-                          scalar_t Vmax = 0.05, scalar_t Re = 3e4,
+    void convergence_test(int count = 11, int start_size = 128, scalar_t log_step_size = 0.5, int iterations = 400,
+                          scalar_t Vmax = 0.05, scalar_t Re = 3000,
                           lb::CollisionType collision_type = CollisionType::LBGK) {
 
         std::cout << "Simulation parameters:" << std::endl;
